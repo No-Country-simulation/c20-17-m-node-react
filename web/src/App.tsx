@@ -1,14 +1,14 @@
 import "./App.css";
 import Login from "./dashboard/Login.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Main from "./dashboard/Main.tsx";
+import Dashboard from "./dashboard/Dashboard.tsx";
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/main" element={<Main />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </>

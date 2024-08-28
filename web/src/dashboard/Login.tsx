@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import LoginForm from "./components/LoginForm";
 import Preloader from "./components/LoginPreloader";
+import "./css/Login.css";
 
 function Login() {
   const [loading, setLoading] = useState(true);
@@ -13,25 +14,17 @@ function Login() {
       setTimeout(() => {
         setLoading(false);
       }, 500);
-    }, 2000);
+    }, 1800);
 
     return () => clearTimeout(time);
-    /* window.onload = () => {
-      setFadeOut(true);
-      setTimeout(() => {
-        setLoading(false);
-      }, 500);
-    };
-
-    return () => {
-      window.onload = null;
-    }; */
   }, []);
 
   return (
     <>
-      {loading && <Preloader fadeout={fadeOut} />}
-      <LoginForm />
+      <div className="container-fluid h-100 text-bg-dark overflow-hidden loginform">
+        {loading && <Preloader fadeout={fadeOut} />}
+        <LoginForm />
+      </div>
     </>
   );
 }
