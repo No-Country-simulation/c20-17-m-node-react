@@ -14,7 +14,7 @@ Caracteristicas Esenciales
 ### Colaboradores
 - **Fernando Martínez** - Programador Backend: www.linkedin.com/in/fernandoh-martinez
 - **Walter Maza** - Programador Backend: www.linkedin.com/in/waltermaza/
-- **Kurt Angeles Segura** - Programadora Frontend: www.linkedin.com/in/kurt-angeles-segura-570b23239/
+- **Kurt Angeles Segura** - Programador Frontend: www.linkedin.com/in/kurt-angeles-segura-570b23239/
 #### Tecnologías Backend
 - NodeJs
 - Express
