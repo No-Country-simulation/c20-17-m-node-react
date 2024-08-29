@@ -3,9 +3,28 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  background-color: black;
 }
 
 .preloader {
   opacity: 1;
   transition: opacity 0.5s ease-out;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
 }
