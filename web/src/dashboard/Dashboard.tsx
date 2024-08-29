@@ -103,7 +103,7 @@ function Dashboard() {
           </div>
         </main>
         <footer className={styles.footer}>
-          <p>© 2022 NoaBank. Todos los derechos reservados.</p>
+          <p>© 2024 NoaBank. Todos los derechos reservados.</p>
         </footer>
       </div>
     </>
