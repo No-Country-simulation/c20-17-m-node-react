@@ -16,6 +16,17 @@
 .navBar li {
   list-style: none;
 }
+
+.navBar li a {
+  text-decoration: none;
+  color: white;
+}
+
+.navBar li a:hover {
+  cursor: pointer;
+  color: aqua;
+}
+
 .circle {
   width: 40px;
   height: 40px;
@@ -52,10 +63,7 @@
 }
 
 /* ---------------------- mostrar cuentas ------------------------ */
-a {
-  text-decoration: none;
-  color: white;
-}
+
 .eye {
   font-size: 20px;
   text-decoration: none;
@@ -78,6 +86,15 @@ a {
   justify-content: space-between;
   align-items: center;
   padding: 0px 10px;
+}
+
+.accountancla {
+  text-decoration: none;
+  color: #fff;
+}
+
+.accountancla:hover {
+  color: #6e6f6f;
 }
 
 .account {
@@ -138,4 +155,28 @@ a {
 
 .footer p {
   margin: 0;
+}
+
+@media screen and (max-width: 550px) {
+  .navBar {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 50%;
+    background-color: rgb(43, 48, 53);
+    flex-direction: column;
+    display: none;
+    padding: 0;
+    padding-bottom: 5px;
+  }
+
+  .navBar li {
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+  }
+
+  #menu:checked ~ .navBar {
+    display: initial;
+  }
 }
