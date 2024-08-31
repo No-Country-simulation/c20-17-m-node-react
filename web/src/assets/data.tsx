@@ -5,7 +5,7 @@ interface Cuenta {
   monto: number;
 }
 
-interface User {
+export interface User {
   id: string;
   type: string;
   name: string;
@@ -14,10 +14,10 @@ interface User {
   email: string;
   password: string;
   state: boolean;
-  cuentas?: Cuenta[];
+  cuentas: Cuenta[];
 }
 
-const users: User[] = [
+export const users: User[] = [
   {
     id: "70342458",
     type: "persona",
@@ -32,7 +32,7 @@ const users: User[] = [
         id: 1,
         type: "ahorro",
         number: "4557 8813 2288 0735",
-        monto: 500,
+        monto: 5368,
       },
     ],
   },
@@ -62,7 +62,6 @@ const users: User[] = [
     password: "admin",
     email: "admin@admin",
     state: true,
+    cuentas: [],
   },
 ];
-
-export default users;
