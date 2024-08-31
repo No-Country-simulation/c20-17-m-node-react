@@ -3,7 +3,8 @@ import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import users from "../../assets/data";
+import { users } from "../../assets/data";
+import { Link } from "react-router-dom";
 
 function LoginForm() {
   //useNavigate para poder redireccionar
@@ -47,7 +48,7 @@ function LoginForm() {
         localStorage.removeItem("remember");
       }
 
-      navigate("/dashboard", { state: { name: userExist.name } });
+      navigate("/dashboard", { state: { user: userExist } });
     } else {
       alert("Credenciales incorrectas");
     }
@@ -97,7 +98,7 @@ function LoginForm() {
 
             <div className="register-link">
               <p>
-                ¿Aún no estas registrado? <a href="#">Regístrate</a>
+                ¿Aún no estas registrado? <Link to="/register">Regístrate</Link>
               </p>
             </div>
           </form>
