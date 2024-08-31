@@ -50,19 +50,21 @@ function Dashboard() {
                 </a>
               </div>
               {/* DIV DE NAVEGACION */}
-              <div className="d-flex" role="search">
+              <div className="d-flex gap-3" role="search">
+                <input type="checkbox" id={styles.menu} className="d-none" />
                 <ul className={styles.navBar}>
                   <li>Inicio</li>
-                  <li>Operaciones</li>
                   <li>
-                    <Link to="/">
-                      <a href="">Cerrar sesion</a>
-                    </Link>
+                    <Link to="/">Transferencias</Link>
                   </li>
                   <li>
-                    <div className={styles.circle}>K</div>
+                    <Link to="/">Cerrar sesion</Link>
                   </li>
                 </ul>
+
+                <label htmlFor={styles.menu}>
+                  <div className={styles.circle}>K</div>
+                </label>
               </div>
             </div>
           </nav>
@@ -90,7 +92,7 @@ function Dashboard() {
                   </a>
                 </div>
 
-                <a href="">
+                <a href="" className={styles.accountancla}>
                   <div className={styles.account}>
                     <div>
                       <h6>CUENTA {user.cuentas[0].type.toUpperCase()}</h6>
