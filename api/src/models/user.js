@@ -1,5 +1,5 @@
 import { mongoose } from "mongoose";
-import { bcrypt } from "bcryptjs";
+import  bcrypt  from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
 
@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
     },
     date_of_birth:{
         type: Date,
-        required: true,
+        // required: true,
         
     },
     phone:{
@@ -51,6 +51,7 @@ const userSchema = new mongoose.Schema({
     },
     amount: {
         type: Number,
+        default: 0
     }
 })
 

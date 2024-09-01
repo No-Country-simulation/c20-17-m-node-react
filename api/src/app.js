@@ -4,7 +4,7 @@ import authRouter from "./routes/auth.js"
 import 'dotenv/config'
 
 const port = process.env.PORT
-const app = express() 
+const app = express()
 
 mongoose.connect(process.env.MONGODB_URI+process.env.APP_NAME)
     .then(()=> console.log(`  MongoDB connected to \x1b[34m${process.env.APP_NAME}\x1b[0m database.
@@ -20,6 +20,7 @@ mongoose.connect(process.env.MONGODB_URI+process.env.APP_NAME)
 
 // })
 
+app.use(express.json())
 app.use('/api', authRouter)
 
 app.listen(port, ()=>{
