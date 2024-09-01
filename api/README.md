@@ -1,7 +1,7 @@
 # NoaBank
 
 
-## Instrucciones para levartar el servidor:
+## Instrucciones para levantar el servidor:
 
 1) Clonar el proyecto:
 
@@ -24,7 +24,7 @@ plantilla para crear el archivo .env :
   .env.example
   .env
 ```
-4) Ejecutar el comando para start para levantar al proyecto:
+4) Ejecutar el comando start para levantar al proyecto:
 
 ```bash
 
