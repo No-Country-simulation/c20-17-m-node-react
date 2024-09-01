@@ -28,10 +28,9 @@ const userSchema = new mongoose.Schema({
     },
     role:{
         type: String,
-        required: true,
         default: 'user',
     },
-    birthday:{
+    date_of_birth:{
         type: Date,
         required: true,
         
@@ -41,22 +40,18 @@ const userSchema = new mongoose.Schema({
         required: true,
         
     },
-    adress:{
+    address:{
         type: String,
         required: true,
         
     },
-    user_account_1:{
+    user_account:{
         type: String,
        
     },
-    user_account_2:{
-        type: String,
-       
-    },user_account_3:{
-        type: String,
-       
-    },
+    amount: {
+        type: Number,
+    }
 })
 
 
