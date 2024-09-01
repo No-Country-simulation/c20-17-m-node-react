@@ -1,5 +1,6 @@
 import { mongoose } from "mongoose"
-import express from "express";
+import express from "express"
+import authRouter from "./routes/auth.js"
 import 'dotenv/config'
 
 const port = process.env.PORT
@@ -14,10 +15,12 @@ mongoose.connect(process.env.MONGODB_URI+process.env.APP_NAME)
     `, err))
 
 
-app.use('/', (req, res) => {
-    res.send(`<h1>${process.env.APP_NAME}</h1>`)
+// app.use('/', (req, res) => {
+//     res.send(`<h1>${process.env.APP_NAME}</h1>`)
 
-})
+// })
+
+app.use('/api', authRouter)
 
 app.listen(port, ()=>{
     console.log(
