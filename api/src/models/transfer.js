@@ -11,9 +11,8 @@ const transfer = new mongoose.Schema({
 
     },
     mount:{
-        type: String,
+        type: Number,
         required: true,
-        minlength: 3,
 
     },
     emisor_id:{
@@ -28,6 +27,8 @@ const transfer = new mongoose.Schema({
         minlength: 3,
 
     },
-    
-
+    createtAT: {
+        type: Date,
+        default: Date.now,
+    },
 })
