@@ -1,10 +1,15 @@
-const mongoose = require ('mongoose')
-
-
+import { mongoose } from "mongoose";
+import { bcrypt } from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
 
-    username:{
+    first_name:{
+        type: String,
+        required: true,
+        minlength: 3,
+
+    },
+    last_name:{
         type: String,
         required: true,
         minlength: 3,
@@ -13,7 +18,7 @@ const userSchema = new mongoose.Schema({
     email:{
         type: String,
         required: true,
-        
+        unique: true,
     },
 
     password:{
@@ -21,7 +26,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         minlength: 8,
     },
-    user_type:{
+    role:{
         type: String,
         required: true,
         default: 'user',
@@ -41,13 +46,17 @@ const userSchema = new mongoose.Schema({
         required: true,
         
     },
-
-    user_account:{
+    user_account_1:{
         type: String,
        
     },
-
-
+    user_account_2:{
+        type: String,
+       
+    },user_account_3:{
+        type: String,
+       
+    },
 })
 
 
@@ -65,4 +74,4 @@ userSchema.methods.matchPassword = async function (enteredPassword){
 
 
 const User = mongoose.model('User',userSchema)
-module.exports = User
+export default User;
