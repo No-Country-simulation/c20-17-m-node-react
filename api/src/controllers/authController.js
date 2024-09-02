@@ -24,7 +24,7 @@ export const registerUser = async (req, res) => {
 
         res.status(201).json({
             _id: user._id,
-            username: user.first_name,
+            first_name: user.first_name,
             token: generateToken(user._id)
         })
         
@@ -36,11 +36,23 @@ export const registerUser = async (req, res) => {
 
 //loginUser
 export const loginUser = async (req, res) => {
-    const user = req.body
+    const data = req.body
 
     try {
-        
+        const user = await User.findOne({email: data.email})
 
+        if(user && (await user.matchPassword(data.password))) {
+            res.json({
+                _id: user._id,
+                first_name: user.first_name,
+                account_type: user.account_type,
+                account_number: user.account_number,
+                user_role: user.user_role,
+                account_balance: user.account_balance,
+                token: generateToken(user._id),
+                // vinculo a coleccion de transferencias
+            })
+        }
 
     } catch (err) {
         res.status(500).json({message: err.message})

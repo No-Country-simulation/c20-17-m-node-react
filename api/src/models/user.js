@@ -20,15 +20,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-
     password:{
         type: String,
         required: true,
         minlength: 8,
-    },
-    role:{
-        type: String,
-        default: 'user',
     },
     date_of_birth:{
         type: Date,
@@ -45,13 +40,22 @@ const userSchema = new mongoose.Schema({
         required: true,
         
     },
-    user_account:{
+    user_role:{
         type: String,
+        default: 'user',
+    },
+    account_type: {
+        type: String,
+        default: "personal_account"
+        //personal_account or company_account
+    },
+    account_number:{
+        type: Number,
        
     },
-    amount: {
+    account_balance: {
         type: Number,
-        default: 0
+        default: 157000
     }
 })
 
