@@ -6,14 +6,12 @@ const userSchema = new mongoose.Schema({
     first_name:{
         type: String,
         required: true,
-        minlength: 3,
-
+        minlength: 2,
     },
     last_name:{
         type: String,
         required: true,
-        minlength: 3,
-
+        minlength: 2,
     },
     email:{
         type: String,
@@ -23,22 +21,19 @@ const userSchema = new mongoose.Schema({
     password:{
         type: String,
         required: true,
-        minlength: 8,
+        minlength: 6,
     },
     date_of_birth:{
         type: Date,
-        // required: true,
-        
+        // required: true,  
     },
     phone:{
-        type: Number,
-        required: true,
-        
+        type: String,
+        required: true,  
     },
     address:{
         type: String,
-        required: true,
-        
+        required: true, 
     },
     user_role:{
         type: String,
@@ -50,8 +45,7 @@ const userSchema = new mongoose.Schema({
         //personal_account or company_account
     },
     account_number:{
-        type: Number,
-       
+        type: String,
     },
     account_balance: {
         type: Number,
