@@ -1,15 +1,14 @@
 import "../css/Login.css";
-import { FaUser } from "react-icons/fa";
-import { FaLock } from "react-icons/fa";
+import { FaUser, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { users } from "../../assets/data";
 import { Link } from "react-router-dom";
+import { login } from "../../services/authService.tsx";
 
 function LoginForm() {
   //useNavigate para poder redireccionar
   const navigate = useNavigate();
-  //creamos useState para email, password y recordardatos
+  //creamos useState para email, password y recordar datos
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
@@ -28,29 +27,31 @@ function LoginForm() {
   }, []);
 
   //funcion para manejar el submit
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    //validar credenciales
-    const userExist = users.find(
-      (user) => user.email === email && user.password === password
-    );
+    try {
+      const userExist = await login(email, password);
+      //si las credenciales son correctas
+      if (userExist._id) {
+        if (remember) {
+          localStorage.setItem("email", email);
+          localStorage.setItem("password", password);
+          localStorage.setItem("remember", "true");
+        } else {
+          localStorage.removeItem("email");
+          localStorage.removeItem("password");
+          localStorage.removeItem("remember");
+        }
 
-    //si las credenciales son correctas
-    if (userExist) {
-      if (remember) {
-        localStorage.setItem("email", email);
-        localStorage.setItem("password", password);
-        localStorage.setItem("remember", "true");
-      } else {
-        localStorage.removeItem("email");
-        localStorage.removeItem("password");
-        localStorage.removeItem("remember");
+        sessionStorage.setItem("token", userExist.token);
+
+        //redireccionar
+        navigate("/dashboard", { state: { user: userExist } });
       }
-
-      navigate("/dashboard", { state: { user: userExist } });
-    } else {
-      alert("Credenciales incorrectas");
+    } catch (error) {
+      console.log(error);
+      alert("Hubo un problema con el inicio de sesión. Inténtalo de nuevo.");
     }
   };
 
