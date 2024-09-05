@@ -35,7 +35,6 @@ export const registerUser = async (req, res) => {
 //loginUser
 export const loginUser = async (req, res) => {
   const data = req.body;
-  console.log(data);
   try {
     const user = await User.findOne({ email: data.email });
 
@@ -43,6 +42,7 @@ export const loginUser = async (req, res) => {
       res.json({
         _id: user._id,
         first_name: user.first_name,
+        last_name: user.last_name,
         account_type: user.account_type,
         account_number: user.account_number,
         user_role: user.user_role,
