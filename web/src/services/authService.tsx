@@ -23,9 +23,8 @@ export const login = async (
     return response.data;
   } catch (error) {
     console.log(error);
-
     throw error;
   }
 };
 
-//curl -v -X POST http://localhost:8080/api/login -H "Content-Type: application/json" -d '{"email": "waltermaza@gmail.com_001", "password": "12345678"}'
+//curl -v -X POST http://localhost:8080/api/login -H "Content-Type: application/json" -d '{"email": "kurt@gmail.com", "password": "12345678"}'
