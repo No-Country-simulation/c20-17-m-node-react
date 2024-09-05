@@ -1,3 +1,12 @@
+.containerRegister {
+  background-color: rgb(33, 37, 41);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
 
 .register-card {
   width: 510px;
@@ -5,36 +14,45 @@
   color: #ffffff;
   border-radius: 5px;
   padding: 30px 50px;
-  }
-  
-  .register-title {
-    color: #ffffff;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .register-form .form-row {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .register-form .form-group {
-    margin-bottom: 15px;
-    width: 48%;
-  }
-  
-  .btn-toggle-password {
-    margin-top: 4px;
-    font-size: 15px;
-    background: none;
-    border: none;
-    color: #007bff;
-    cursor: pointer;
-  }
-  
-  .btn-primary {
-    width: 100%;
-    background-color: #00a79d;
-    border: none;
-  }
-  
+}
+
+.register-title {
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.register-form .form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.register-form .form-group {
+  margin-bottom: 15px;
+  width: 48%;
+}
+
+.terms {
+  display: flex;
+  gap: 5px;
+}
+
+.terms label p {
+  font-size: 12px;
+  width: max-content;
+}
+
+.btn-toggle-password {
+  margin-top: 4px;
+  font-size: 15px;
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.btn-primary {
+  width: 100%;
+  background-color: #00a79d;
+  border: none;
+}
