@@ -1,0 +1,40 @@
+
+.register-card {
+  width: 510px;
+  background: rgb(44, 43, 49);
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 30px 50px;
+  }
+  
+  .register-title {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .register-form .form-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .register-form .form-group {
+    margin-bottom: 15px;
+    width: 48%;
+  }
+  
+  .btn-toggle-password {
+    margin-top: 4px;
+    font-size: 15px;
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    width: 100%;
+    background-color: #00a79d;
+    border: none;
+  }
+  
