@@ -97,7 +97,7 @@ function Dashboard() {
                     <div className={styles.account}>
                       <div>
                         <h6>CUENTA {user.account_type.toUpperCase()}</h6>
-                        <p>**** {user.account_number}</p>
+                        <p>****{user.account_number.slice(-8)}</p>
                       </div>
                       <div>
                         <span>
