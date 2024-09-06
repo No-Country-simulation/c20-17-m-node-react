@@ -16,15 +16,26 @@ const transfer = new mongoose.Schema({
 
     },
     emisor_id:{
-        type: String,
-        required: true,
-        minlength: 3,
-
+        type: [
+            {
+                emisor: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "User"
+                }
+            }
+        ],
+        default: []
+    
     },
     receptor_id:{
-        type: String,
-        required: true,
-        minlength: 3,
+        type: [
+            {
+                receptor: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "User"
+                }
+            }
+        ]
 
     },
     createtAt: {
