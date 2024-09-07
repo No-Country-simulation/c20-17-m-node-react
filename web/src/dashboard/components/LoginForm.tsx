@@ -92,7 +92,7 @@ function LoginForm() {
                 />
                 Remember me
               </label>
-              <a href="#">¿Olvidaste la Contraseña?</a>
+              <Link to="/passwordrecovery">¿Olvidaste la Contraseña?</Link>
             </div>
 
             <button type="submit">Login</button>
