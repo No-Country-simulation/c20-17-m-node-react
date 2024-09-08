@@ -1,24 +1,46 @@
 import "./App.css";
-import Login from "./dashboard/Login.tsx";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Dashboard from "./dashboard/Dashboard.tsx";
-import Register from "./dashboard/Register.tsx";
-import TermsConditions from "./dashboard/TermsConditions.tsx";
-import PasswordRecovery from "./dashboard/PasswordRecovery.tsx";
-function App() {
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
+
+const Login = lazy(() => import("./dashboard/Login.tsx"));
+const Dashboard = lazy(() => import("./dashboard/Dashboard.tsx"));
+const Register = lazy(() => import("./dashboard/Register.tsx"));
+const TermsConditions = lazy(() => import("./dashboard/TermsConditions.tsx"));
+const PasswordRecovery = lazy(() => import("./dashboard/PasswordRecovery.tsx"));
+const FallBack = lazy(() => import("./dashboard/FallBack.tsx"));
+
+export default function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/passwordrecovery" element={<PasswordRecovery />} />
-          <Route path="/termsconditions" element={<TermsConditions />} />
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/passwordrecovery" element={<PasswordRecovery />} />
+            <Route path="/termsconditions" element={<TermsConditions />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
   );
 }
 
-export default App;
+export function Layout() {
+  return (
+    <>
+      <div>
+        <Suspense
+          fallback={
+            <div>
+              <FallBack></FallBack>
+            </div>
+          }
+        >
+          <Outlet />
+        </Suspense>
+      </div>
+    </>
+  );
+}

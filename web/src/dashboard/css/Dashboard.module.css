@@ -10,6 +10,33 @@ h3 {
   flex-direction: column;
   height: 100vh;
 }
+.containerlogo {
+  display: flex;
+}
+
+.navbarBrand {
+  text-decoration: none;
+  color: #fff;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  overflow: hidden;
+  object-fit: cover;
+  height: 30px;
+  width: 50px;
+}
+.logo img {
+  padding-top: 4px;
+  width: 60px;
+}
+
+.containerlogo p {
+  display: flex;
+  align-items: center;
+}
 
 .navBar {
   display: flex;
@@ -43,6 +70,7 @@ h3 {
 }
 
 /* -------------------MAIN --------------------------------- */
+
 .main {
   background-color: rgb(33, 37, 41);
 }
@@ -54,7 +82,7 @@ h3 {
   justify-content: space-between;
   align-items: center;
   /*  border: 1px solid; */
-  padding: 0 20px;
+  padding: 0 50px;
   height: 100px;
 }
 
@@ -71,6 +99,10 @@ h3 {
 }
 
 .accountscontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
 }
 
 .eye {
@@ -205,16 +237,47 @@ h3 {
   }
 }
 
+/* (de 1024px para arriba se activa) */
 @media screen and (min-width: 1024px) {
   .main {
     height: 630px;
-    display: flex;
-    flex-direction: column;
-    gap: 5rem;
   }
 
   .accountscontainer {
     display: flex;
     width: auto;
+  }
+}
+
+@media screen and (min-width: 1130px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .containerwelcome {
+    width: 1130px;
+  }
+
+  .welcome {
+    padding: 0 10px;
+  }
+  .welcome img {
+    width: 100px;
+  }
+  .logo {
+    width: 30px;
+  }
+
+  .logo img {
+    margin-left: -21px;
+  }
+
+  .articles {
+    width: 30%;
+  }
+
+  .accountscontainer {
+    width: 70%;
   }
 }
