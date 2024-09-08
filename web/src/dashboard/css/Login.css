@@ -4,6 +4,19 @@
   width: 100vh;
 }
 
+.loginlogo {
+  height: 55px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginlogo img {
+  height: 100px;
+  object-fit: cover;
+}
+
 .loginform {
   position: absolute;
   top: 0;

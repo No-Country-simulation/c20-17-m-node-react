@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { login } from "../../services/authService.tsx";
+import logoimg from "../../assets/logo.png";
 
 function LoginForm() {
   //useNavigate para poder redireccionar
@@ -60,7 +61,9 @@ function LoginForm() {
       <div className="container-fluid h-100 p-0 d-flex flex-column align-items-center justify-content-center text-bg-dark">
         <div className="wrapper">
           <form onSubmit={handleSubmit}>
-            <h1>Login</h1>
+            <div className="loginlogo">
+              <img src={logoimg} alt="LogoNoaBank" />
+            </div>
             <div className="input-box">
               <input
                 type="text"
