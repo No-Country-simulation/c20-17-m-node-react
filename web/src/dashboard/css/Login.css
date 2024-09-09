@@ -75,6 +75,15 @@
   margin: -15px 0 15px;
 }
 
+.remember-forgot label {
+  display: flex;
+  align-items: center;
+}
+
+.remember-forgot p {
+  margin: 0;
+}
+
 .remember-forgot label input {
   accent-color: #fff;
   margin-right: 4px;

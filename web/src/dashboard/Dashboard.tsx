@@ -1,7 +1,8 @@
 import logoperson from "../assets/logoperson.svg";
 import styles from "./css/Dashboard.module.css";
 import { useLocation, Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logoimg from "../assets/logo.png";
 //import DashboarTransferencesCard from "./components/DashboarTransferencesCard";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -9,9 +10,20 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 function Dashboard() {
   const location = useLocation();
   const user = location.state?.user;
-  console.log(user);
+  const navigate = useNavigate();
   const [activeEye, setActiveEye] = useState(true);
 
+  useEffect(() => {
+    const isAuthenticated = sessionStorage.getItem("auth");
+    if (!isAuthenticated) {
+      navigate("/");
+    }
+  }, [navigate]);
+
+  function handleLogout() {
+    sessionStorage.removeItem("auth"); // Elimina el estado de autenticación
+    navigate("/");
+  }
   /* const transferencia = transferences.filter(
     (transference) =>
       transference.cuentafrom === user.cuentas[0].number ||
@@ -59,13 +71,13 @@ function Dashboard() {
                     <Link to="/">Transferencias</Link>
                   </li>
                   <li>
-                    <Link to="/">Cerrar sesion</Link>
+                    <a onClick={handleLogout}>Cerrar sesion</a>
                   </li>
                 </ul>
 
                 <label htmlFor={styles.menu}>
                   <div className={styles.circle}>
-                    {user.first_name.slice(0, 1)}
+                    {user.first_name.slice(0, 1).toUpperCase()}
                   </div>
                 </label>
               </div>
@@ -102,7 +114,7 @@ function Dashboard() {
                       <div className={styles.account}>
                         <div>
                           <h6>CUENTA {user.account_type.toUpperCase()}</h6>
-                          <p>****{user.account_number.slice(-8)}</p>
+                          <p>****{user.account_number}</p>
                         </div>
                         <div>
                           <span>

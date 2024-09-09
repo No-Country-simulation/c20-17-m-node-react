@@ -19,7 +19,7 @@ function PasswordRecovery() {
                   Ingresa tu correo electronico y te enviaremos un correo para
                   que resetees tu contraseña
                 </p>
-                <input type="email" id="email" />
+                <input type="email" id="email" className="forminput" />
               </div>
               <button type="submit">Enviar</button>
             </form>
