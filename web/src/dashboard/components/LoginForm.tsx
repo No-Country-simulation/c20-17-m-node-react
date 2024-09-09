@@ -20,6 +20,10 @@ function LoginForm() {
     const savedPassword = localStorage.getItem("password");
     const savedRemenber = localStorage.getItem("remember") === "true";
 
+    if (sessionStorage.getItem("auth") === "true") {
+      sessionStorage.removeItem("auth");
+    }
+
     if (savedRemenber) {
       setEmail(savedEmail || "");
       setPassword(savedPassword || "");
@@ -46,13 +50,14 @@ function LoginForm() {
         }
 
         sessionStorage.setItem("token", userExist.token);
+        sessionStorage.setItem("auth", "true");
 
         //redireccionar
         navigate("/dashboard", { state: { user: userExist } });
       }
     } catch (error) {
       console.log(error);
-      alert("Hubo un problema con el inicio de sesión. Inténtalo de nuevo.");
+      alert("Usario o contraseña incorrecta.");
     }
   };
 
@@ -93,7 +98,7 @@ function LoginForm() {
                   checked={remember}
                   onChange={() => setRemember(!remember)}
                 />
-                Remember me
+                <p> Remember me</p>
               </label>
               <Link to="/passwordrecovery">¿Olvidaste la Contraseña?</Link>
             </div>

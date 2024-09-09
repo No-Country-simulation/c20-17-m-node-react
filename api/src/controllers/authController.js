@@ -11,21 +11,32 @@ export const generateToken = (id) => {
 
 //registerUser
 export const registerUser = async (req, res) => {
+  console.log("entramos al api registerUser");
   const data = req.body;
 
+  console.log(data);
   try {
     const userExists = await User.findOne({ email: data.email });
 
     if (userExists) {
-      res.status(401).json({ message: "User already exists." });
+      return res
+        .status(409)
+        .json({ message: "Un usuario ya existe con este correo." });
     }
 
-    const user = await User.create(data);
+    const accountType =
+      data.type === "empresa" ? "company_account" : "personal_account";
+
+    const user = await User.create({
+      ...data,
+      account_type: accountType,
+    });
 
     res.status(201).json({
-      _id: user._id,
+      message: "Su cuenta ha sido creada exitosamente.",
+      /* _id: user._id,
       first_name: user.first_name,
-      token: generateToken(user._id),
+      token: generateToken(user._id), */
     });
   } catch (err) {
     res.status(500).json({ message: err.message });

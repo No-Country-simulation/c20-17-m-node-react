@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./css/Register.css";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { register } from "../services/authService";
 
 function Register() {
   // Declaración del estado para mostrar u ocultar la contraseña
@@ -36,6 +38,60 @@ function Register() {
     }
   }
 
+  //useNavigate para poder redireccionar
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const type = String(
+      document.querySelector(".active")?.innerHTML.toLocaleLowerCase()
+    );
+
+    const first_name = (document.getElementById("name") as HTMLInputElement)
+      .value;
+    const lastname = (document.getElementById("apellido") as HTMLInputElement)
+      .value;
+    const email = (document.getElementById("email") as HTMLInputElement).value;
+    const address = (document.getElementById("address") as HTMLInputElement)
+      .value;
+    const phone = (document.getElementById("phone") as HTMLInputElement).value;
+    const date_of_birth = String(
+      (document.getElementById("birthday") as HTMLInputElement).value
+    );
+    const password = (document.getElementById("password") as HTMLInputElement)
+      .value;
+    const confirmpassword = document.getElementById(
+      "passwordx2"
+    ) as HTMLInputElement;
+
+    if (password !== confirmpassword.value) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+    try {
+      const createUser = await register(
+        first_name,
+        lastname,
+        email,
+        address,
+        phone,
+        date_of_birth,
+        password,
+        type
+      );
+      if (createUser.status === 409) {
+        alert(createUser.data.message);
+      } else {
+        // Aquí manejarías la creación exitosa del usuario
+        alert(createUser.data.message);
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Un error a ocurrido. Intentalo otra vez.");
+    }
+  };
+
   return (
     <div className="containerRegister">
       <div>
@@ -60,7 +116,7 @@ function Register() {
         <div className="register-card">
           <h1 className="register-title">Regístrate</h1>
 
-          <form className="register-form">
+          <form className="register-form" onSubmit={handleSubmit}>
             <div className="form-row">
               <div className="form-group col-md-6">
                 <label htmlFor="name">Nombre:</label>
@@ -69,6 +125,7 @@ function Register() {
                   id="name"
                   className="form-control"
                   placeholder="Ingresa tu nombre"
+                  required
                 />
               </div>
               <div className="form-group col-md-6" id="lastname">
@@ -89,6 +146,7 @@ function Register() {
                   id="email"
                   className="form-control"
                   placeholder="Ingresa tu correo electrónico"
+                  required
                 />
               </div>
               <div className="form-group col-md-6">
@@ -98,6 +156,7 @@ function Register() {
                   id="address"
                   className="form-control"
                   placeholder="Ingresa tu Dirección"
+                  required
                 />
               </div>
             </div>
@@ -109,11 +168,14 @@ function Register() {
                   id="phone"
                   className="form-control"
                   placeholder="Ingresa Telefono"
+                  maxLength={9}
+                  minLength={9}
+                  required
                 />
               </div>
-              <div className="form-group col-md-6" id="birthday">
+              <div className="form-group col-md-6">
                 <label htmlFor="email">Fecha de Nacimiento:</label>
-                <input type="date" className="form-control" />
+                <input type="date" id="birthday" className="form-control" />
               </div>
             </div>
             <div className="form-row">
@@ -124,6 +186,7 @@ function Register() {
                   id="password"
                   className="form-control"
                   placeholder="Ingresa tu contraseña"
+                  minLength={6}
                 />
                 <button
                   type="button"
@@ -140,11 +203,13 @@ function Register() {
                   id="passwordx2"
                   className="form-control"
                   placeholder="Ingresa tu contraseña de nuevo"
+                  minLength={6}
+                  required
                 />
               </div>
             </div>
             <div className="form-group terms">
-              <input type="checkbox" id="terms" />
+              <input type="checkbox" id="terms" required />
               <label htmlFor="terms">
                 <p className="text">
                   {" "}
