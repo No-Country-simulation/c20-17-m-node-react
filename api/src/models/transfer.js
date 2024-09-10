@@ -1,45 +1,25 @@
-const mongoose = require ('mongoose')
+import { mongoose } from "mongoose";
 
+const transferSchema = new mongoose.Schema({
 
-
-const transfer = new mongoose.Schema({
-
-    // transfer_id:{
-    //     type: String,
-    //     required: true,
-    //     minlength: 3,
-
-    // },
     mount:{
         type: Number,
         required: true,
-
     },
-    emisor_id:{
-        type: [
-            {
-                emisor: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: "User"
-                }
-            }
-        ],
-        default: []
-    
+    emisor_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     },
-    receptor_id:{
-        type: [
-            {
-                receptor: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: "User"
-                }
-            }
-        ]
-
+    receptor_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
     },
-    createtAt: {
+    createdAt: {
         type: Date,
         default: Date.now,
     },
 })
+
+const Transfer = mongoose.model('Transfer', transferSchema);
+
+export default Transfer;

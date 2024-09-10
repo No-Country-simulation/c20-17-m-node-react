@@ -1,6 +1,8 @@
 import { mongoose } from "mongoose";
 import express from "express";
 import authRouter from "./routes/auth.js";
+import transferRouter from "./routes/transfer.js";
+import utilsRouter from "./routes/utils.js";
 import "dotenv/config";
 import cors from "cors";
 
@@ -23,20 +25,19 @@ mongoose
     )
   );
 
-// app.use('/', (req, res) => {
-//     res.send(`<h1>${process.env.APP_NAME}</h1>`)
-
-// })
-
 app.use(cors());
 app.use(express.json());
+
 app.use("/api", authRouter);
+app.use('/transfer', transferRouter);
+
+app.use('/utils', utilsRouter);
 
 app.listen(port, () => {
   console.log(
     `
 ===========================================
-\x1b[42m       Server running on port ${port}         \x1b[0m
+       \x1b[32mServer running on port ${port}\x1b[0m         
 ===========================================`
   );
 });

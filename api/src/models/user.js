@@ -48,7 +48,7 @@ const userSchema = new mongoose.Schema({
   },
   account_balance: {
     type: Number,
-    default: 157000,
+    //default: 157000,
   },
   createdAt: {
     type: Date,
