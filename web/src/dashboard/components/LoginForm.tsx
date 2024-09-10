@@ -4,9 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { login } from "../../services/authService.tsx";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../services/userSlice.tsx";
 import logoimg from "../../assets/logo.png";
 
 function LoginForm() {
+  const dispatch = useDispatch();
+
   //useNavigate para poder redireccionar
   const navigate = useNavigate();
   //creamos useState para email, password y recordar datos
@@ -52,8 +56,11 @@ function LoginForm() {
         sessionStorage.setItem("token", userExist.token);
         sessionStorage.setItem("auth", "true");
 
+        dispatch(setUser(userExist));
+        console.log("User to dispatch:", userExist);
+
         //redireccionar
-        navigate("/dashboard", { state: { user: userExist } });
+        navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);

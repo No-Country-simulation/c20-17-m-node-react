@@ -1,17 +1,25 @@
-import logoperson from "../assets/logoperson.svg";
 import styles from "./css/Dashboard.module.css";
-import { useLocation, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+//import { UserContext } from "../services/UserContext";
+import { Link, Outlet } from "react-router-dom";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../services/store";
+import { clearUser } from "../services/userSlice";
+import { User } from "../assets/data";
 import logoimg from "../assets/logo.png";
-//import DashboarTransferencesCard from "./components/DashboarTransferencesCard";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Dashboard() {
-  const location = useLocation();
-  const user = location.state?.user;
+  //const location = useLocation();
   const navigate = useNavigate();
-  const [activeEye, setActiveEye] = useState(true);
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user) as User | null;
+  console.log(user);
+  console.log("User from Redux:", user);
+
+  //const user = location.state?.user || {};
+
+  //const [user, setUser] = useState(() => location.state?.user || null);
 
   useEffect(() => {
     const isAuthenticated = sessionStorage.getItem("auth");
@@ -22,26 +30,10 @@ function Dashboard() {
 
   function handleLogout() {
     sessionStorage.removeItem("auth"); // Elimina el estado de autenticación
+    dispatch(clearUser(null));
     navigate("/");
   }
-  /* const transferencia = transferences.filter(
-    (transference) =>
-      transference.cuentafrom === user.cuentas[0].number ||
-      transference.cuentato === user.cuentas[0].number
-  );
 
-  const recentTransferences = transferencia
-    .slice(0, 3)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); */
-
-  /* function getUserByAccountNumber(accountNumber: string): string {
-    const user = users.find((user) =>
-      user.cuentas.some((cuenta) => cuenta.number === accountNumber)
-    );
-    return user ? user.name : "Desconocido";
-  } */
-
-  //console.log(recentTransferences);
   return (
     <>
       <div className={styles.container}>
@@ -66,9 +58,11 @@ function Dashboard() {
               <div className="d-flex gap-3" role="search">
                 <input type="checkbox" id={styles.menu} className="d-none" />
                 <ul className={styles.navBar}>
-                  <li>Inicio</li>
                   <li>
-                    <Link to="/">Transferencias</Link>
+                    <Link to="/dashboard">Inicio</Link>
+                  </li>
+                  <li>
+                    <Link to="transferences">Transferencias</Link>
                   </li>
                   <li>
                     <a onClick={handleLogout}>Cerrar sesion</a>
@@ -77,7 +71,7 @@ function Dashboard() {
 
                 <label htmlFor={styles.menu}>
                   <div className={styles.circle}>
-                    {user.first_name.slice(0, 1).toUpperCase()}
+                    {(user?.first_name || "?").slice(0, 1).toUpperCase()}
                   </div>
                 </label>
               </div>
@@ -85,77 +79,9 @@ function Dashboard() {
           </nav>
 
           {/*-------------------- MAIN ----------------- */}
+
           <main className={styles.main}>
-            {/* ------------------- BIENVENIDA ----------------- */}
-            <div className={styles.containerwelcome}>
-              <div className={styles.welcome}>
-                <div>
-                  <h3>Hola, {user.first_name} </h3>
-                  <p>¿Que vamos a hacer hoy?</p>
-                </div>
-                <img src={logoperson} alt="" />
-              </div>
-              {/* -------------------- MOSTRAR CUENTAS CON EL MONTO ------------------- */}
-              <div className={styles.containermain}>
-                <div className={styles.articles}></div>
-                <div className={styles.accountscontainer}>
-                  <div className={styles.accounts}>
-                    <div className={styles.accountstitle}>
-                      <h2>Mis cuentas</h2>
-                      <a
-                        className={styles.eye}
-                        onClick={() => setActiveEye(!activeEye)}
-                      >
-                        {activeEye ? <FaEye /> : <FaEyeSlash />}
-                      </a>
-                    </div>
-
-                    <a href="" className={styles.accountancla}>
-                      <div className={styles.account}>
-                        <div>
-                          <h6>CUENTA {user.account_type.toUpperCase()}</h6>
-                          <p>****{user.account_number}</p>
-                        </div>
-                        <div>
-                          <span>
-                            $ {activeEye ? user.account_balance : "****"}
-                          </span>
-                          <span>Saldo disponible</span>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  {/* -------------- ULTIMAS TRANFERENCIAS ----------------- */}
-                  <div className={styles.transactions}>
-                    <h2>Ultimas Transferencias</h2>
-                    <div className={styles.transaction}>
-                      {/* recentTransferences.map((transference) => {
-                      const accountNumber =
-                        transference.cuentafrom === user.cuentas[0].number
-                          ? transference.cuentato
-                          : transference.cuentafrom;
-
-                      const accountOwner =
-                        getUserByAccountNumber(accountNumber);
-                      const color =
-                        accountNumber === transference.cuentato
-                          ? "red"
-                          : "green";
-                      return (
-                        <DashboarTransferencesCard
-                          key={transference.id}
-                          nombre={accountOwner}
-                          fecha={new Date(transference.date)}
-                          monto={transference.monto}
-                          color={color}
-                        ></DashboarTransferencesCard>
-                      );
-                    }) */}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Outlet />
           </main>
           <footer className={styles.footer}>
             <p>© 2024 NoaBank. Todos los derechos reservados.</p>
