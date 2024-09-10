@@ -1,7 +1,8 @@
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-
+import { faker } from '@faker-js/faker';
+// import { v4 as uuidv4 } from 'uuid';
 //generateToken
 export const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -17,17 +18,39 @@ export const registerUser = async (req, res) => {
     const userExists = await User.findOne({ email: data.email });
 
     if (userExists) {
-      res.status(401).json({ message: "User already exists." });
+     return  res.status(401).json({ message: "User already exists." });
     }
 
-    const user = await User.create(data);
+   
+
+    
+
+    const fakeIBAN = faker.finance.iban();
+    console.log('Generated IBAN:',fakeIBAN);
+
+    const fakeAccountNumber = faker.finance.accountNumber();
+    const fakeAccountBalance = faker.finance.amount(1000, 500000, 2); 
+
+
+    const nuevaData = {
+      ...data,
+      iban: fakeIBAN,
+      account_number: fakeAccountNumber,
+      account_balance: fakeAccountBalance,
+    };
+
+    const user = await User.create(nuevaData);
+    console.log('Data to create user:', nuevaData);
 
     res.status(201).json({
       _id: user._id,
       first_name: user.first_name,
+      account_number: user.account_number,
+      account_balance: user.account_balance,
       token: generateToken(user._id),
     });
   } catch (err) {
+    console.error('Error creating user:', err);
     res.status(500).json({ message: err.message });
   }
 };
