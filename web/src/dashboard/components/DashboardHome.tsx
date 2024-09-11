@@ -5,32 +5,13 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "../../services/store";
 import { User } from "../../assets/data";
+import DashboarTransferencesCard from "./DashboarTransferencesCard";
 
 function DashboardHome() {
   //const user = useContext(UserContext);
   const [activeEye, setActiveEye] = useState(true);
 
   const user = useSelector((state: RootState) => state.user) as User | null;
-
-  /* const transferencia = transferences.filter(
-    (transference) =>
-      transference.cuentafrom === user.cuentas[0].number ||
-      transference.cuentato === user.cuentas[0].number
-  );
-
-  const recentTransferences = transferencia
-    .slice(0, 3)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); */
-
-  /* function getUserByAccountNumber(accountNumber: string): string {
-    const user = users.find((user) =>
-      user.cuentas.some((cuenta) => cuenta.number === accountNumber)
-    );
-    return user ? user.name : "Desconocido";
-  } */
-
-  //console.log(recentTransferences);
-
   return (
     <>
       <div className={styles.containerwelcome}>
@@ -69,8 +50,7 @@ function DashboardHome() {
                   </div>
                   <div>
                     <span>
-                      ${" "}
-                      {activeEye ? user?.account_balance || "Unknown" : "****"}
+                      $ {activeEye ? user?.account_balance || "nani?" : "****"}
                     </span>
                     <span>Saldo disponible</span>
                   </div>
@@ -81,28 +61,27 @@ function DashboardHome() {
             <div className={styles.transactions}>
               <h2>Ultimas Transferencias</h2>
               <div className={styles.transaction}>
-                {/* recentTransferences.map((transference) => {
-                      const accountNumber =
-                        transference.cuentafrom === user.cuentas[0].number
-                          ? transference.cuentato
-                          : transference.cuentafrom;
+                {user?.transfers?.map((transference) => {
+                  let color = "";
+                  let accountOwner = "";
+                  if (user._id === transference.receptor.receptorId) {
+                    color = "red";
+                    accountOwner = transference.emisor.firstname;
+                  } else {
+                    color = "green";
+                    accountOwner = transference.receptor.firstname;
+                  }
 
-                      const accountOwner =
-                        getUserByAccountNumber(accountNumber);
-                      const color =
-                        accountNumber === transference.cuentato
-                          ? "red"
-                          : "green";
-                      return (
-                        <DashboarTransferencesCard
-                          key={transference.id}
-                          nombre={accountOwner}
-                          fecha={new Date(transference.date)}
-                          monto={transference.monto}
-                          color={color}
-                        ></DashboarTransferencesCard>
-                      );
-                    }) */}
+                  return (
+                    <DashboarTransferencesCard
+                      key={transference._id}
+                      nombre={accountOwner}
+                      fecha={transference.createdAt}
+                      monto={transference.mount}
+                      color={color}
+                    ></DashboarTransferencesCard>
+                  );
+                })}
               </div>
             </div>
           </div>

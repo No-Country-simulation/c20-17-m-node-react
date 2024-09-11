@@ -1,7 +1,7 @@
 import styles from "../css/Dashboard.module.css";
 interface props {
   nombre: string;
-  fecha: Date;
+  fecha: string;
   monto: number;
   color: string;
 }
@@ -11,7 +11,7 @@ function DashboarTransferencesCard({ nombre, fecha, monto, color }: props) {
       <div className={styles.transactioncard}>
         <div>
           <h6>{nombre}</h6>
-          <p>{fecha.toLocaleDateString()}</p>
+          <p>{fecha}</p>
         </div>
         <div>
           <p style={{ color: color, fontWeight: "bold" }}>

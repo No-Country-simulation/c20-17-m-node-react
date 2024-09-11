@@ -101,8 +101,7 @@ h3 {
 .accountscontainer {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 20px;
+  padding: 10px 20px;
 }
 
 .eye {
@@ -185,7 +184,11 @@ h3 {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid;
-  padding: 0.8rem 0.8rem 0 0.8rem;
+  padding: 0.5rem 0.8rem 0.2rem 0.8rem;
+}
+
+.transactioncard p {
+  font-size: 14px;
 }
 
 .footer {

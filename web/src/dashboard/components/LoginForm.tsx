@@ -57,7 +57,7 @@ function LoginForm() {
         sessionStorage.setItem("auth", "true");
 
         dispatch(setUser(userExist));
-        console.log("User to dispatch:", userExist);
+        /* console.log("User to dispatch:", userExist); */
 
         //redireccionar
         navigate("/dashboard");
