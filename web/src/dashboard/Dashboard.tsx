@@ -15,19 +15,12 @@ function Dashboard() {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user) as User | null;
 
-  /* console.log(user);
-  console.log("User from Redux:", user); */
-
-  //const user = location.state?.user || {};
-
-  //const [user, setUser] = useState(() => location.state?.user || null);
-
   useEffect(() => {
     const isAuthenticated = sessionStorage.getItem("auth");
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !user) {
       navigate("/");
     }
-  }, [navigate]);
+  }, [navigate, user]);
 
   function handleLogout() {
     sessionStorage.removeItem("auth"); // Elimina el estado de autenticación
@@ -66,7 +59,7 @@ function Dashboard() {
                     <Link to="transferences">Transferencias</Link>
                   </li>
                   <li>
-                    <a onClick={handleLogout}>Cerrar sesion</a>
+                    <a onClick={handleLogout}>Cerrar sesión</a>
                   </li>
                 </ul>
 
