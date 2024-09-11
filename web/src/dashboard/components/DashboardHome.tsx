@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../services/store";
 import { User } from "../../assets/data";
 import DashboarTransferencesCard from "./DashboarTransferencesCard";
-
+import PersonCard from "../../assets/personcard.svg";
+import { Link } from "react-router-dom";
 function DashboardHome() {
   //const user = useContext(UserContext);
   const [activeEye, setActiveEye] = useState(true);
@@ -20,11 +21,13 @@ function DashboardHome() {
             <h3>Hola, {user?.first_name || "Unknown"} </h3>
             <p>¿Que vamos a hacer hoy?</p>
           </div>
-          <img src={logoperson} alt="" />
+          <img src={PersonCard} alt="" />
         </div>
         {/* -------------------- MOSTRAR CUENTAS CON EL MONTO ------------------- */}
-        <div className={styles.containermain}>
-          <div className={styles.articles}></div>
+        <main className={styles.containermain}>
+          <div className={styles.articles}>
+            <img src={logoperson} alt="" />
+          </div>
           <div className={styles.accountscontainer}>
             <div className={styles.accounts}>
               <div className={styles.accountstitle}>
@@ -36,8 +39,7 @@ function DashboardHome() {
                   {activeEye ? <FaEye /> : <FaEyeSlash />}
                 </a>
               </div>
-
-              <a href="" className={styles.accountancla}>
+              <Link to="transferences" className={styles.accountancla}>
                 <div className={styles.account}>
                   <div>
                     <h6>
@@ -50,25 +52,26 @@ function DashboardHome() {
                   </div>
                   <div>
                     <span>
-                      $ {activeEye ? user?.account_balance || "nani?" : "****"}
+                      ${" "}
+                      {activeEye ? user?.account_balance || "Unknown" : "****"}
                     </span>
                     <span>Saldo disponible</span>
                   </div>
                 </div>
-              </a>
+              </Link>
             </div>
             {/* -------------- ULTIMAS TRANFERENCIAS ----------------- */}
             <div className={styles.transactions}>
               <h2>Ultimas Transferencias</h2>
               <div className={styles.transaction}>
-                {user?.transfers?.map((transference) => {
+                {user?.transfers?.slice(0, 3).map((transference) => {
                   let color = "";
                   let accountOwner = "";
                   if (user._id === transference.receptor.receptorId) {
-                    color = "red";
+                    color = "rgb(270, 71, 71)";
                     accountOwner = transference.emisor.firstname;
                   } else {
-                    color = "green";
+                    color = "rgb(71, 158, 71)";
                     accountOwner = transference.receptor.firstname;
                   }
 
@@ -85,7 +88,7 @@ function DashboardHome() {
               </div>
             </div>
           </div>
-        </div>
+        </main>
       </div>
     </>
   );

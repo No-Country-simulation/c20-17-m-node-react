@@ -101,7 +101,7 @@ h3 {
 .accountscontainer {
   display: flex;
   flex-direction: column;
-  padding: 10px 20px;
+  padding: 0px 20px;
 }
 
 .eye {
@@ -179,6 +179,11 @@ h3 {
   padding: 10px;
 }
 
+.transactionTransferences {
+  border: 1px solid;
+  padding: 10px;
+}
+
 .transactioncard {
   display: flex;
   justify-content: space-between;
@@ -190,6 +195,26 @@ h3 {
 .transactioncard p {
   font-size: 14px;
 }
+
+.transactionbackground {
+  background-color: rgb(43, 48, 53);
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 44px;
+}
+
+.transactioncontainer input {
+  width: 70%;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  outline: none;
+  border-radius: 40px;
+  font-size: 16px;
+  color: #ffffff;
+  padding: 5px 20px;
+}
+
+/* ------------------------------ FOOTER --------------------------------- */
 
 .footer {
   display: flex;
@@ -278,6 +303,12 @@ h3 {
 
   .articles {
     width: 30%;
+    display: flex;
+    align-items: center;
+  }
+
+  .articles img {
+    width: 100%;
   }
 
   .accountscontainer {

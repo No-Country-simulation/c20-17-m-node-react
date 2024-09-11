@@ -61,7 +61,7 @@ export const loginUser = async (req, res) => {
           $sort: { createdAt: -1 },
         },
         {
-          $limit: 3,
+          $limit: 10,
         },
         {
           $lookup: {

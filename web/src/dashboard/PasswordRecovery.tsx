@@ -14,7 +14,7 @@ function PasswordRecovery() {
           </div>
           <div className="recoveryForm">
             <form action="">
-              <div>
+              <div className="recoveryInput">
                 <p>
                   Ingresa tu correo electronico y te enviaremos un correo para
                   que resetees tu contraseña
