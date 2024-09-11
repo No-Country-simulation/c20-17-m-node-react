@@ -54,10 +54,7 @@ export const loginUser = async (req, res) => {
       const transfers = await Transfer.aggregate([
         {
           $match: {
-            $or: [
-              { emisor_id: user._id },
-              { receptor_id: user._id },
-            ],
+            $or: [{ emisor_id: user._id }, { receptor_id: user._id }],
           },
         },
         {
@@ -68,44 +65,46 @@ export const loginUser = async (req, res) => {
         },
         {
           $lookup: {
-            from: 'users',
-            localField: 'emisor_id',
-            foreignField: '_id',
-            as: 'emisor',
+            from: "users",
+            localField: "emisor_id",
+            foreignField: "_id",
+            as: "emisor",
           },
         },
         {
-          $unwind: '$emisor',
+          $unwind: "$emisor",
         },
         {
           $lookup: {
-            from: 'users',
-            localField: 'receptor_id',
-            foreignField: '_id',
-            as: 'receptor',
+            from: "users",
+            localField: "receptor_id",
+            foreignField: "_id",
+            as: "receptor",
           },
         },
         {
-          $unwind: '$receptor',
+          $unwind: "$receptor",
         },
 
         {
           $project: {
             _id: 1,
             mount: 1,
-            createdAt: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+            createdAt: {
+              $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+            },
             emisor: {
-              firstname: '$emisor.first_name',
-              lastname: '$emisor.last_name',
-              emisorId: '$emisor._id',
+              firstname: "$emisor.first_name",
+              lastname: "$emisor.last_name",
+              emisorId: "$emisor._id",
             },
             receptor: {
-              firstname: '$receptor.first_name',
-              lastname: '$receptor.last_name',
-              receptorId: '$receptor._id',
+              firstname: "$receptor.first_name",
+              lastname: "$receptor.last_name",
+              receptorId: "$receptor._id",
             },
           },
-        }
+        },
       ]);
 
       res.json({
@@ -119,10 +118,10 @@ export const loginUser = async (req, res) => {
         token: generateToken(user._id),
         transfers,
       });
-  }
+    }
   } catch (err) {
-  res.status(500).json({ message: err.message });
-}
+    res.status(500).json({ message: err.message });
+  }
 };
 
 //loginUser version anterior

@@ -14,8 +14,9 @@ function Dashboard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user) as User | null;
-  console.log(user);
-  console.log("User from Redux:", user);
+
+  /* console.log(user);
+  console.log("User from Redux:", user); */
 
   //const user = location.state?.user || {};
 
