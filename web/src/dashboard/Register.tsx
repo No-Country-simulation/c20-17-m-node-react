@@ -15,7 +15,7 @@ function Register() {
 
   function openTab(tabname: string) {
     const lastname = document.getElementById("lastname");
-    const birthday = document.getElementById("birthday");
+    const birthday = document.getElementById("birthdaycontainer");
     if (tabname === "empresa") {
       if (lastname && birthday) {
         lastname.style.display = "none";
@@ -173,7 +173,7 @@ function Register() {
                   required
                 />
               </div>
-              <div className="form-group col-md-6">
+              <div className="form-group col-md-6" id="birthdaycontainer">
                 <label htmlFor="email">Fecha de Nacimiento:</label>
                 <input type="date" id="birthday" className="form-control" />
               </div>
