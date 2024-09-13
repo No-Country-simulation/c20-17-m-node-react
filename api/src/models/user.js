@@ -68,5 +68,17 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
+userSchema.methods.updateBalance = async function (balance, isDeposit) {
+  if(isDeposit) {
+    this.account_balance += balance;
+  }else {
+    if(this.account_balance < balance) {
+      throw new Error('Saldo insuficiente');
+    }
+    this.account_balance -= balance;
+  }
+  await this.save();
+}
+
 const User = mongoose.model("User", userSchema);
 export default User;
