@@ -21,21 +21,13 @@ export const registerUser = async (req, res) => {
      return  res.status(401).json({ message: "User already exists." });
     }
 
-   
-
-    
-
-    const fakeIBAN = faker.finance.iban();
+    const fakeIBAN = `MR${faker.string.numeric(22)}`;
     console.log('Generated IBAN:',fakeIBAN);
-
-    const fakeAccountNumber = faker.finance.accountNumber();
-    const fakeAccountBalance = faker.finance.amount(1000, 500000, 2); 
-
+    const fakeAccountBalance = faker.finance.amount(1000, 99999, 2); 
 
     const nuevaData = {
       ...data,
-      iban: fakeIBAN,
-      account_number: fakeAccountNumber,
+         account_number: fakeIBAN,
       account_balance: fakeAccountBalance,
     };
 
