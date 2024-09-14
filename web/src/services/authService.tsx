@@ -131,3 +131,15 @@ export const transferSave = async (
     }
   }
 };
+
+export const updateUser = async (_id: string): Promise<LoginResponse> => {
+  try {
+    const response = await axios.post<LoginResponse>(`${API_URL}/updateuser`, {
+      _id,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

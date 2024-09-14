@@ -1,16 +1,18 @@
 import styles from "../css/DashboardTransferences.module.css";
 import logoperson from "../../assets/logoperson.svg";
 import DashboarTransferencesCard from "./DashboarTransferencesCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../services/userSlice.tsx";
 import { RootState } from "../../services/store";
 import { User } from "../../assets/data";
-import { searchUser } from "../../services/authService";
+import { searchUser, updateUser } from "../../services/authService";
 import { useState } from "react";
 import { transferSave } from "../../services/authService";
 import { searchedUser } from "../../assets/data";
 
 const DashboardTransferences = () => {
   const user = useSelector((state: RootState) => state.user) as User | null;
+
   const [accountNumber, setAccountNumber] = useState<string>("");
   const [transactioncontainer, setTransactioncontainer] =
     useState<boolean>(false);
@@ -19,6 +21,7 @@ const DashboardTransferences = () => {
   const [mountTransfer, setMountTransfer] = useState<number>(0);
   const [userExist, setUserExist] = useState<searchedUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,6 +67,10 @@ const DashboardTransferences = () => {
       } else {
         // Aquí manejarías la creación exitosa de la transferencia
         alert(createTransfer.data.message);
+        console.log(user?._id);
+        const userUpdate = await updateUser(user?._id ?? "");
+
+        dispatch(setUser(userUpdate));
       }
     } catch (error) {
       console.error(error);
