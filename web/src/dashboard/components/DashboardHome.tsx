@@ -68,10 +68,10 @@ function DashboardHome() {
                   let color = "";
                   let accountOwner = "";
                   if (user._id === transference.receptor.receptorId) {
-                    color = "rgb(270, 71, 71)";
+                    color = "#479E47";
                     accountOwner = transference.emisor.firstname;
                   } else {
-                    color = "rgb(71, 158, 71)";
+                    color = "#FF4747";
                     accountOwner = transference.receptor.firstname;
                   }
 

@@ -24,3 +24,12 @@ interface transferences {
   };
   createdAt: string;
 }
+
+export interface searchedUser {
+  data: {
+    _id: string;
+    first_name: string;
+    last_name: string;
+    account_number: string;
+  };
+}

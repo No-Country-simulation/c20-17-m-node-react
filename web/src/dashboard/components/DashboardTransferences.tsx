@@ -6,6 +6,8 @@ import { RootState } from "../../services/store";
 import { User } from "../../assets/data";
 import { searchUser } from "../../services/authService";
 import { useState } from "react";
+import { transferSave } from "../../services/authService";
+import { searchedUser } from "../../assets/data";
 
 const DashboardTransferences = () => {
   const user = useSelector((state: RootState) => state.user) as User | null;
@@ -14,18 +16,57 @@ const DashboardTransferences = () => {
     useState<boolean>(false);
   const [transactionFound, setTransactionFound] = useState<boolean>(false);
   const [userName, setUserName] = useState<string>("");
-  console.log(transactionFound);
+  const [mountTransfer, setMountTransfer] = useState<number>(0);
+  const [userExist, setUserExist] = useState<searchedUser | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+    if (accountNumber.trim() === "") {
+      alert("Por favor, ingresa un número de cuenta.");
+      return;
+    }
+
+    // Realizar la búsqueda
     setTransactioncontainer(true);
     try {
-      const userExist = await searchUser(accountNumber);
-      setUserName(`${userExist.data.first_name} ${userExist.data.last_name}`);
+      const exist = await searchUser(accountNumber);
+      setUserExist(exist);
+      setUserName(`${exist.data.first_name} ${exist.data.last_name}`);
       setTransactionFound(true);
     } catch (error) {
       console.error(error);
       setTransactionFound(false);
       // Mostrar mensaje de error si es necesario
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleTransfer = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (mountTransfer <= 0) {
+      alert("El monto debe ser mayor a 0.");
+      return;
+    }
+
+    try {
+      const createTransfer = await transferSave(
+        mountTransfer,
+        user?._id ?? "",
+        userExist?.data?._id ?? ""
+      );
+
+      if (createTransfer.status === 409) {
+        alert(createTransfer.data.message);
+      } else {
+        // Aquí manejarías la creación exitosa de la transferencia
+        alert(createTransfer.data.message);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -45,8 +86,8 @@ const DashboardTransferences = () => {
             {user?.transfers?.map((transference) => {
               const color =
                 user._id === transference.receptor.receptorId
-                  ? "rgb(270, 71, 71)"
-                  : "rgb(71, 158, 71)";
+                  ? "#479E47"
+                  : "#FF4747";
               const accountOwner =
                 user._id === transference.receptor.receptorId
                   ? transference.emisor.firstname
@@ -76,24 +117,34 @@ const DashboardTransferences = () => {
                 value={accountNumber}
                 onChange={(e) => setAccountNumber(e.target.value)}
               />
-              <button onClick={handleSearch}>Buscar</button>
+              <button onClick={handleSearch} disabled={isLoading}>
+                {isLoading ? "Buscando..." : "Buscar"}
+              </button>
             </div>
             {transactioncontainer && (
               <div>
-                {transactionFound && (
-                  <div className={styles.transactionfound}>
-                    <span>Cuenta encontrada</span>
-                    <h5>{userName}</h5>
-                    <p>Ingresa el monto a transferir</p>
-                    <input type="text" placeholder="Monto a transferir" />
-                    <button>Transferir</button>
-                  </div>
-                )}
-                {!transactionFound && (
-                  <div className={styles.transactionnotfound}>
-                    <span>Cuenta inexistente</span>
-                  </div>
-                )}
+                <form action="" onSubmit={handleTransfer}>
+                  {transactionFound && (
+                    <div className={styles.transactionfound}>
+                      <span>Cuenta encontrada</span>
+                      <h5>{userName}</h5>
+                      <p>Ingresa el monto a transferir</p>
+                      <input
+                        type="text"
+                        placeholder="Monto a transferir"
+                        onChange={(e) =>
+                          setMountTransfer(Number(e.target.value))
+                        }
+                      />
+                      <button type="submit">Transferir</button>
+                    </div>
+                  )}
+                  {!transactionFound && (
+                    <div className={styles.transactionnotfound}>
+                      <span>Cuenta inexistente</span>
+                    </div>
+                  )}
+                </form>
               </div>
             )}
           </div>

@@ -20,6 +20,10 @@ interface SearchUser {
   account_number: string;
 }
 
+interface transferSave {
+  message: string;
+}
+
 const API_URL = "http://localhost:8080/api"; //endpoint?
 
 export const login = async (
@@ -101,3 +105,29 @@ export const searchUser = async (
 };
 
 //curl -v -X POST http://localhost:8080/transfer/search -H "Content-Type: application/json" -d '{"account_number": "VG7275757443655928672589"}'
+
+export const transferSave = async (
+  mount: number,
+  emisor_id: string,
+  receptor_id: string
+): Promise<AxiosResponse<transferSave>> => {
+  try {
+    const response = await axios.post<transferSave>(
+      `${API_TRANSFER}/savetransfer`,
+      {
+        mount,
+        emisor_id,
+        receptor_id,
+      }
+    );
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 409) {
+      // Maneja el error 409 (Usuario no existe)
+      return error.response; // Devuelve la respuesta con el status 409
+    } else {
+      console.error("Unexpected error:", error);
+      throw error; // Re-lanza otros errores
+    }
+  }
+};
