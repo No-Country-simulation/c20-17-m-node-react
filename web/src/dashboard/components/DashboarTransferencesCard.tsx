@@ -15,7 +15,7 @@ function DashboarTransferencesCard({ nombre, fecha, monto, color }: props) {
         </div>
         <div>
           <p style={{ color: color, fontWeight: "bold" }}>
-            {color === "red" ? "-" : "+"}$ {monto}
+            {color === "#FF4747" ? "-" : "+"}$ {monto}
           </p>
         </div>
       </div>
