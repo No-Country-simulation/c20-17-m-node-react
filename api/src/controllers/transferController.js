@@ -14,22 +14,27 @@ const transferSave = async (req, res) => {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
 
-    //Verifico saldo y actualizar
-    await emisor.updateBalance(mount, false); //Restar al emisor
+    //Verifico saldo y actualizo
+    const suff_balance = await emisor.updateBalance(mount, false); //Restar al emisor
 
-    //Actualizo account_balance del receptor
-    await receptor.updateBalance(mount, true); //Sumar al receptor
+    if(suff_balance) {
+      res.status(200).json({message: 'Saldo insuficiente'});
+    } else {
 
-    //Creo la transferencia
-    const transfer = new Transfer({
-      emisor_id: emisor._id,
-      receptor_id: receptor._id,
-      mount,
-    });
-
-    await transfer.save();
-
-    res.status(201).json({ message: "Transferencia exitosa." });
+      //Actualizo account_balance del receptor
+      await receptor.updateBalance(mount, true); //Sumar al receptor
+  
+      //Creo la transferencia
+      const transfer = new Transfer({
+        emisor_id: emisor._id,
+        receptor_id: receptor._id,
+        mount,
+      });
+  
+      await transfer.save();
+  
+      res.status(201).json({ message: "Transferencia exitosa." });
+    }
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error al realizar la transferencia" });

@@ -73,7 +73,8 @@ userSchema.methods.updateBalance = async function (balance, isDeposit) {
     this.account_balance += balance;
   }else {
     if(this.account_balance < balance) {
-      throw new Error('Saldo insuficiente');
+      // throw new Error('Saldo insuficiente');
+      return true;
     }
     this.account_balance -= balance;
   }
