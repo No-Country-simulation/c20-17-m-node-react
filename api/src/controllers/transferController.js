@@ -45,12 +45,23 @@ const searchUser = async (req, res) => {
   const { searchQuery } = req.body;
 
   try {
-    const user = await User.findOne({ account_number: searchQuery }).select([
-      "_id",
-      "first_name",
-      "last_name",
-      "account_number",
-    ]);
+    let user;
+    if(searchQuery.length > 20) {
+
+      user = await User.findOne({ account_number: searchQuery }).select([
+        "_id",
+        "first_name",
+        "last_name",
+        "account_number",
+      ]);
+    } else {
+      user = await User.findOne({ alias: searchQuery }).select([
+        "_id",
+        "first_name",
+        "last_name",
+        "account_number",
+      ]);
+    }
 
     if (!user) {
       return res.status(404).json({ message: "Destinatario no encontrado" });
@@ -62,5 +73,6 @@ const searchUser = async (req, res) => {
     res.status(500).json({ message: "Error al buscar destinatario" });
   }
 };
+
 
 export { transferSave, searchUser };
