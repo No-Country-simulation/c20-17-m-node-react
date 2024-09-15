@@ -50,6 +50,9 @@ const userSchema = new mongoose.Schema({
     type: Number,
     //default: 157000,
   },
+  alias: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
