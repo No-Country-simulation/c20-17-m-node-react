@@ -22,3 +22,6 @@ Nuestra plataforma ofrece una experiencia intuitiva y segura, diseñada tanto pa
 **¿Cuál es nuestra visión?**
 
 Nuestra ambición va más allá de una simple aplicación. Queremos revolucionar la forma en que las personas interactúan con sus finanzas. Imaginamos un futuro donde las transacciones sean instantáneas, seguras y transparentes. Un futuro donde cada usuario tenga el control total de su dinero.
+
+Para agregar respecto a la implementacion de otp para mejorar la seguridad:
+OTP verification provides an additional layer of security to net packages by requiring customers to provide a unique, one-time code to confirm their identity. This allows save you unauthorized get admission to and protects sensitive consumer information from being compromised.
