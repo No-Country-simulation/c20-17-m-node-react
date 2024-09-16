@@ -22,21 +22,21 @@ async function sendOtpEmail(email, otp) {
     try {
         const mailResponse = await mailSender(
             email,
-            "One Time Password email",
-            `<h1>Por favor ingrese esta One Time Password para acceder a su cuenta de NoaBank</h1>
-            <p>Aquí está su código a utilizar como password temporal: ${otp}</p>`
+            "Noabank password temporal",
+            `<h2>One Time Password para acceder a su cuenta de NoaBank</h2>
+            <h3>Aquí está su código a utilizar como password temporal: </h3><h1>${otp}</h1>`
         );
-        console.log("Email enviado exitosamente", mailResponse);
+        // console.log("Email enviado exitosamente", mailResponse);
     } catch (err) {
         console.log("Error al enviar el mail: ", err);
     }
 }
 
 otpSchema.pre("save", async function (next) {
-    console.log("Nuevo documento guardado en otp");
+    console.log("Nuevo documento guardado en la DB");
     if(this.isNew) {
         await sendOtpEmail(this.email, this.otp);
-        console.log("ENVIANDO EL MAIL CON EL OTP");
+        console.log("Mail enviado con password temporal 📨🔑");
     }
     next();
 });
