@@ -24,6 +24,10 @@ interface transferSave {
   message: string;
 }
 
+interface forgotPassword {
+  message: string;
+}
+
 const API_URL = "http://localhost:8080/api"; //endpoint?
 
 export const login = async (
@@ -143,3 +147,26 @@ export const updateUser = async (_id: string): Promise<LoginResponse> => {
     throw error;
   }
 };
+
+/* ------------------------- PASSWORD RECOVERY ---------------------------------------- */
+//forgotpassword
+
+export const forgotpassword = async (
+  email: string
+): Promise<forgotPassword> => {
+  try {
+    const response = await axios.post<forgotPassword>(
+      `${API_URL}/forgotpassword`,
+      {
+        email,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+/* --------- OTP LOGIN ------------- */
+/* /otplogin */
