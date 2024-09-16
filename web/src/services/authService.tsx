@@ -170,3 +170,9 @@ export const forgotpassword = async (
 
 /* --------- OTP LOGIN ------------- */
 /* /otplogin */
+
+/* export const optLogin = async(
+  otp: string;
+): Promise<LoginResponse> => {
+  
+} */
