@@ -43,6 +43,10 @@ const userSchema = new mongoose.Schema({
     default: "personal_account",
     //personal_account or company_account
   },
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
   account_number: {
     type: String,
   },
