@@ -141,6 +141,43 @@ export const registerUser = async (req, res) => {
 
 //loginUser version nueva
 export const loginUser = async (req, res) => {
+  //login con otp
+  if (req.body.otp) {
+    try {
+      const { otp } = req.body;
+
+      //Buscar en Otp model por otp , el que sea mas reciente
+      const response = await Otp.find({ otp }).sort({ createdAt: -1 }).limit(1);
+
+      if (response.length === 0 || otp !== response[0].otp) {
+        return res.status(401).json({ message: 'One Time Password inválida o expirada' });
+      }
+
+      const user = await User.findOne({ email: response[0].email });
+
+      // Se llama a la funcion que recopila las transferencias "tranfers()"
+
+      res.json({
+        _id: user._id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        account_type: user.account_type,
+        account_number: user.account_number,
+        user_role: user.user_role,
+        account_balance: user.account_balance,
+        token: generateToken(user._id),
+        transfers: await transfers(user),
+      });
+
+    } catch (err) {
+      console.error('Error en login por OTP:', err);
+      res.status(500).json({ error: 'Ocurrio un error en el login mediante One Time Password' });
+    }
+  }
+
+  ////////////////////////////////////////////////////////
+
+  //login con data
   const data = req.body;
   try {
     const user = await User.findOne({ email: data.email });
@@ -225,7 +262,7 @@ export const forgotPassword = async (req, res) => {
     // const optPayload = ;
     await Otp.create({ email, otp });
 
-  
+
     //realizo el res al front
     res.status(200).json({ message: 'One Time Password enviada exitosamente via mail' });
 
@@ -236,36 +273,36 @@ export const forgotPassword = async (req, res) => {
 }
 
 export const loginOtp = async (req, res) => {
-  try {
-    const { otp } = req.body;
+  // try {
+  //   const { otp } = req.body;
 
-    //Buscar en Otp model por otp , el que sea mas reciente
-    const response = await Otp.find({ otp }).sort({createdAt: -1}).limit(1);
+  //   //Buscar en Otp model por otp , el que sea mas reciente
+  //   const response = await Otp.find({ otp }).sort({createdAt: -1}).limit(1);
 
-    if (response.length === 0 || otp !== response[0].otp) {
-      return res.status(401).json({ message: 'One Time Password inválida o expirada' });
-    }
+  //   if (response.length === 0 || otp !== response[0].otp) {
+  //     return res.status(401).json({ message: 'One Time Password inválida o expirada' });
+  //   }
 
-    const user = await User.findOne({ email: response[0].email });
+  //   const user = await User.findOne({ email: response[0].email });
 
-   // Se llama a la funcion que recopila las transferencias "tranfers()"
+  //  // Se llama a la funcion que recopila las transferencias "tranfers()"
 
-    res.json({
-      _id: user._id,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      account_type: user.account_type,
-      account_number: user.account_number,
-      user_role: user.user_role,
-      account_balance: user.account_balance,
-      token: generateToken(user._id),
-      transfers: await transfers(user),
-    });
+  //   res.json({
+  //     _id: user._id,
+  //     first_name: user.first_name,
+  //     last_name: user.last_name,
+  //     account_type: user.account_type,
+  //     account_number: user.account_number,
+  //     user_role: user.user_role,
+  //     account_balance: user.account_balance,
+  //     token: generateToken(user._id),
+  //     transfers: await transfers(user),
+  //   });
 
-  } catch (err) {
-    console.error('Error en login por OTP:', err);
-    res.status(500).json({ error: 'Ocurrio un error en el login mediante One Time Password' });
-  }
+  // } catch (err) {
+  //   console.error('Error en login por OTP:', err);
+  //   res.status(500).json({ error: 'Ocurrio un error en el login mediante One Time Password' });
+  // }
 }
 
 //getMe
