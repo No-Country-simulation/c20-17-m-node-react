@@ -1,9 +1,10 @@
 import User from "../models/user.js";
-import Transfer from "../models/transfer.js";
-import jwt from "jsonwebtoken";
 import otpGenerator from "otp-generator";
 import Otp from "../models/otp.js";
 import "dotenv/config";
+import { transfers } from "../utils/transferData.js";
+import { generateAlias } from "../utils/generateAias.js";
+
 
 //generateToken
 export const generateToken = (id) => {
@@ -112,6 +113,7 @@ const transfers = async (user) => {
     },
   ]);
 };
+=======
 //registerUser
 export const registerUser = async (req, res) => {
   const data = req.body;
@@ -135,10 +137,7 @@ export const registerUser = async (req, res) => {
     });
 
     res.status(201).json({
-      message: "Su cuenta ha sido creada exitosamente.",
-      /* _id: user._id,
-      first_name: user.first_name,
-      token: generateToken(user._id), */
+      message: "Su cuenta ha sido creada exitosamente."
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -147,7 +146,7 @@ export const registerUser = async (req, res) => {
 
 //loginUser version nueva
 export const loginUser = async (req, res) => {
-  //login con otp
+  
   if (req.body.otp) {
     try {
       const { otp } = req.body;
@@ -164,7 +163,6 @@ export const loginUser = async (req, res) => {
       const user = await User.findOne({ email: response[0].email });
 
       // Se llama a la funcion que recopila las transferencias "tranfers()"
-
       res.json({
         _id: user._id,
         first_name: user.first_name,
@@ -183,8 +181,6 @@ export const loginUser = async (req, res) => {
       });
     }
   }
-
-  ////////////////////////////////////////////////////////
 
   //login con data
   const data = req.body;
@@ -230,7 +226,6 @@ export const updateUser = async (req, res) => {
     const user = await User.findById({ _id });
 
     // Se llama a la funcion que recopila las transferencias "tranfers()"
-
     res.json({
       _id: user._id,
       first_name: user.first_name,
@@ -290,6 +285,7 @@ export const forgotPassword = async (req, res) => {
       .json({ message: "Ocurrio un error al genenerar el One Time Password" });
   }
 };
+
 
 export const loginOtp = async (req, res) => {
   // try {

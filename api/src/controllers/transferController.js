@@ -6,14 +6,22 @@ const transferSave = async (req, res) => {
   // const data = req.body
 
   try {
+    //verifico que no sean igual emisor_id con receptor_id
+    if(emisor_id == receptor_id) {
+      
+      return res.status(400).json({ message: "Accion no permitida, mismo emisor y receptor"});
+    }
     //Obtengo los usuarios
     const emisor = await User.findById(emisor_id);
     const receptor = await User.findById(receptor_id);
 
+    
     if (!emisor || !receptor) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
+    
 
+  
     //Verifico saldo y actualizo
     const suff_balance = await emisor.updateBalance(mount, false); //Restar al emisor
 
