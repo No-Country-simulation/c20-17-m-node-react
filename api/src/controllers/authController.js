@@ -192,25 +192,37 @@ export const loginUser = async (req, res) => {
     const user = await User.findOne({ email: data.email });
 
     if (user && (await user.matchPassword(data.password))) {
-      // Se llama a la funcion que recopila las transferencias "tranfers()"
-
-      res.json({
-        _id: user._id,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        account_type: user.account_type,
-        account_number: user.account_number,
-        user_role: user.user_role,
-        account_balance: user.account_balance,
-        token: generateToken(user._id),
-        transfers: await transfers(user),
-      });
+      //verifico si es admin
+      if (user.user_role === "admin") {
+        res.json({
+          _id: user._id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          account_type: "",
+          account_number: "",
+          user_role: user.user_role,
+          account_balance: 0,
+          token: generateToken(user._id),
+          transfers: [],
+        });
+      } else {
+        res.json({
+          _id: user._id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          account_type: user.account_type,
+          account_number: user.account_number,
+          user_role: user.user_role,
+          account_balance: user.account_balance,
+          token: generateToken(user._id),
+          transfers: await transfers(user),
+        });
+      }
     }
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
-
 //updateUser para actualizar la vista home
 export const updateUser = async (req, res) => {
   const { _id } = req.body;

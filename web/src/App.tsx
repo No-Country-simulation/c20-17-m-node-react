@@ -14,6 +14,8 @@ const DashboardHome = lazy(
 const DashboardTransferences = lazy(
   () => import("./dashboard/components/DashboardTransferences.tsx")
 );
+const AdminDashboard = lazy(() => import("./dashboard/AdminDashboard.tsx"));
+
 export default function App() {
   return (
     <>
@@ -28,6 +30,7 @@ export default function App() {
                 element={<DashboardTransferences />}
               />
             </Route>
+            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/register" element={<Register />} />
             <Route path="/passwordrecovery" element={<PasswordRecovery />} />
             <Route path="/termsconditions" element={<TermsConditions />} />

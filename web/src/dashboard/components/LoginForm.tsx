@@ -60,7 +60,11 @@ function LoginForm() {
         /* console.log("User to dispatch:", userExist); */
 
         //redireccionar
-        navigate("/dashboard");
+        if (userExist.user_role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/dashboard");
+        }
       }
     } catch (error) {
       console.log(error);

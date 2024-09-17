@@ -11,9 +11,7 @@ function FallBack() {
             className="spinner-border text-secondary"
             style={{ width: "3rem", height: "3rem" }}
             role="status"
-          >
-            <span className="visually-hidden">Loading... asdhaslfhfhsdfh</span>
-          </div>
+          ></div>
         </div>
       </div>
     </>
