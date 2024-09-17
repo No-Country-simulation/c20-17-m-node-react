@@ -40,7 +40,7 @@ function LoginForm() {
     e.preventDefault();
 
     try {
-      const userExist = await login(email, password);
+      const userExist = await login(email, password, "");
       //si las credenciales son correctas
       if (userExist._id) {
         if (remember) {
