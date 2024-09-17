@@ -40,7 +40,7 @@ function LoginForm() {
     e.preventDefault();
 
     try {
-      const userExist = await login(email, password);
+      const userExist = await login(email, password, "");
       //si las credenciales son correctas
       if (userExist._id) {
         if (remember) {
@@ -60,7 +60,11 @@ function LoginForm() {
         /* console.log("User to dispatch:", userExist); */
 
         //redireccionar
-        navigate("/dashboard");
+        if (userExist.user_role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/dashboard");
+        }
       }
     } catch (error) {
       console.log(error);

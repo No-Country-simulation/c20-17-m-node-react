@@ -5,6 +5,8 @@ interface LoginResponse {
   account_type: string;
   account_number: string;
   user_role: string;
+  email: string;
+  password: string;
   account_balance: number;
   token: string;
 }
@@ -32,12 +34,14 @@ const API_URL = "http://localhost:8080/api"; //endpoint?
 
 export const login = async (
   email: string,
-  password: string
+  password: string,
+  otp: string
 ): Promise<LoginResponse> => {
   try {
     const response = await axios.post<LoginResponse>(`${API_URL}/login`, {
       email,
       password,
+      otp,
     });
     return response.data;
   } catch (error) {
@@ -170,3 +174,9 @@ export const forgotpassword = async (
 
 /* --------- OTP LOGIN ------------- */
 /* /otplogin */
+
+/* export const optLogin = async(
+  otp: string;
+): Promise<LoginResponse> => {
+  
+} */

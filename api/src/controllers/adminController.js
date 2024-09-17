@@ -1,12 +1,8 @@
-import Transfer from "../models/transfer";
-import User from "../models/user";
+import Transfer from "../models/transfer.js";
+import User from "../models/user.js";
 
-const adminHome = async (req, res) => {
+const adminHome = async (req, res) => {};
 
-}
-
-const adminSearch = async (req, res) => {
-
-}
+const adminSearch = async (req, res) => {};
 
 export { adminHome, adminSearch };
