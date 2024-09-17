@@ -184,19 +184,37 @@ export const loginUser = async (req, res) => {
 
     if (user && (await user.matchPassword(data.password))) {
 
-      // Se llama a la funcion que recopila las transferencias "tranfers()"
+      //verifico si es admin
+      if (user.user_role === "admin") {
+        res.json({
+          _id: user._id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          account_type: "",
+          account_number: "",
+          user_role: user.user_role,
+          account_balance: 0,
+          token: generateToken(user._id),
+          transfers: [],
+        });
+      } else {
 
-      res.json({
-        _id: user._id,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        account_type: user.account_type,
-        account_number: user.account_number,
-        user_role: user.user_role,
-        account_balance: user.account_balance,
-        token: generateToken(user._id),
-        transfers: await transfers(user),
-      });
+        // Se llama a la funcion que recopila las transferencias "tranfers()"
+        res.json({
+          _id: user._id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          account_type: user.account_type,
+          account_number: user.account_number,
+          user_role: user.user_role,
+          account_balance: user.account_balance,
+          token: generateToken(user._id),
+          transfers: await transfers(user),
+        });
+      }
+
+    } else {
+      res.status(401).json({ message: 'Invalid username or password' });
     }
   } catch (err) {
     res.status(500).json({ message: err.message });

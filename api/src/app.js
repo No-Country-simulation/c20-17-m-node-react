@@ -3,6 +3,7 @@ import express from "express";
 import authRouter from "./routes/auth.js";
 import transferRouter from "./routes/transfer.js";
 import utilsRouter from "./routes/utils.js";
+import adminRouter from "./routes/admin.js";
 import "dotenv/config";
 import cors from "cors";
 
@@ -30,6 +31,7 @@ app.use(express.json());
 
 app.use("/api", authRouter);
 app.use('/transfer', transferRouter);
+app.use('/admin' , adminRouter);
 
 app.use('/utils', utilsRouter);
 
