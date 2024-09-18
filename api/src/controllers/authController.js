@@ -29,7 +29,7 @@ export const registerUser = async (req, res) => {
     });
 
     res.status(201).json({
-      message: "Su cuenta ha sido creada exitosamente."
+      message: "Su cuenta ha sido creada exitosamente.",
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -38,7 +38,6 @@ export const registerUser = async (req, res) => {
 
 //loginUser version nueva
 export const loginUser = async (req, res) => {
-  
   if (req.body.otp) {
     try {
       const { otp } = req.body;
@@ -179,7 +178,6 @@ export const forgotPassword = async (req, res) => {
       .json({ message: "Ocurrio un error al genenerar el One Time Password" });
   }
 };
-
 
 export const loginOtp = async (req, res) => {
   // try {

@@ -5,8 +5,6 @@ interface LoginResponse {
   account_type: string;
   account_number: string;
   user_role: string;
-  email: string;
-  password: string;
   account_balance: number;
   token: string;
 }
