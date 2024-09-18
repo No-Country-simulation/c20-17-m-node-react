@@ -82,6 +82,7 @@ export const loginUser = async (req, res) => {
     if (user && (await user.matchPassword(data.password))) {
       //verifico si es admin
       if (user.user_role === "admin") {
+        const allUsers = await User.find().select("first_name last_name account_number alias");
         res.json({
           _id: user._id,
           first_name: user.first_name,
@@ -92,6 +93,7 @@ export const loginUser = async (req, res) => {
           account_balance: 0,
           token: generateToken(user._id),
           transfers: [],
+          allUsers
         });
       } else {
         res.json({
