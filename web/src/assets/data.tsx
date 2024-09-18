@@ -7,6 +7,7 @@ export interface User {
   account_number: string | null;
   token: string | null;
   transfers: transferences[] | null;
+  allUsers: AdminUser[] | null;
 }
 
 interface transferences {
@@ -32,4 +33,12 @@ export interface searchedUser {
     last_name: string;
     account_number: string;
   };
+}
+
+export interface AdminUser {
+  _id: string;
+  first_name: string;
+  last_name: string;
+  account_number: string;
+  alias: string;
 }
