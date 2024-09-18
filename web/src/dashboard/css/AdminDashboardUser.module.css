@@ -1,0 +1,149 @@
+/* -------------------- BIENVENIDA ----------------- */
+
+.welcome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /*  border: 1px solid; */
+  padding: 0 50px;
+  height: 100px;
+}
+
+.welcome img {
+  width: 70px;
+}
+
+.welcome p {
+  margin: 0px;
+}
+
+/* ---------------------- SEARCH ---------------------------------- */
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+}
+
+.search input {
+  width: 40%;
+  height: 35px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  outline: none;
+  border-radius: 40px;
+  font-size: 16px;
+  color: #ffffff;
+  padding: 10px 20px;
+}
+
+/* --------------------- TRANSFERENCIAS ----------------- */
+
+.containerTransferences a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.containerTransferences a:hover {
+  color: #eae9b0;
+}
+
+.transactions {
+  padding: 10px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.transactions h2 {
+  padding: 0 10px;
+}
+
+.transaction {
+  border: 1px solid;
+  padding: 10px;
+}
+
+.transactionTransferences {
+  border: 1px solid;
+  padding: 10px;
+}
+
+.transactioncard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid;
+  padding: 0.5rem 0.8rem 0.2rem 0.8rem;
+}
+
+.transactioncard p {
+  font-size: 14px;
+}
+
+.transactionbackground {
+  background-color: rgb(43, 48, 53);
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 44px;
+}
+
+.transactioncontainer input {
+  width: 70%;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  outline: none;
+  border-radius: 40px;
+  font-size: 16px;
+  color: #ffffff;
+  padding: 5px 20px;
+}
+
+@media screen and (min-width: 550px) {
+  .containermain {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* (de 1024px para arriba se activa) */
+@media screen and (min-width: 1024px) {
+}
+
+@media screen and (min-width: 1130px) {
+  .containerwelcome {
+    width: 1130px;
+  }
+
+  .welcome {
+    padding: 0 10px;
+  }
+  .welcome img {
+    width: 100px;
+  }
+  .logo {
+    width: 30px;
+  }
+
+  .logo img {
+    margin-left: -21px;
+  }
+
+  .containerTransferences {
+    width: 50%;
+    padding: 17px 20px;
+  }
+
+  .transactionTransferences {
+    height: 420px;
+    overflow-y: auto;
+  }
+
+  .transactioncontainer {
+    width: 40%;
+    padding: 10px;
+    padding: 17px 20px;
+  }
+}

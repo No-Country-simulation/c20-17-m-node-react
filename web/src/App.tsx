@@ -15,6 +15,13 @@ const DashboardTransferences = lazy(
   () => import("./dashboard/components/DashboardTransferences.tsx")
 );
 const AdminDashboard = lazy(() => import("./dashboard/AdminDashboard.tsx"));
+const AdminDashboardTransferences = lazy(
+  () => import("./dashboard/components/AdminDashboardTransferences.tsx")
+);
+
+const AdminDashboardUser = lazy(
+  () => import("./dashboard/components/AdminDashboardUser.tsx")
+);
 
 export default function App() {
   return (
@@ -30,7 +37,13 @@ export default function App() {
                 element={<DashboardTransferences />}
               />
             </Route>
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin" element={<AdminDashboard />}>
+              <Route index element={<AdminDashboardUser />} />
+              <Route
+                path="admintransferences"
+                element={<AdminDashboardTransferences />}
+              />
+            </Route>
             <Route path="/register" element={<Register />} />
             <Route path="/passwordrecovery" element={<PasswordRecovery />} />
             <Route path="/termsconditions" element={<TermsConditions />} />
