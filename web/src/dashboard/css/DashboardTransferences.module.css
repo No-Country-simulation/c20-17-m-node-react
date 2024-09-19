@@ -4,13 +4,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /*  border: 1px solid; */
-  padding: 0 50px;
+  padding: 0 20px; /* Reducir padding en pantallas más pequeñas */
   height: 100px;
 }
 
 .welcome img {
-  width: 70px;
+  width: 50px; /* Imagen más pequeña en pantallas pequeñas */
 }
 
 .welcome p {
@@ -20,7 +19,7 @@
 /* --------------------- TRANSFERENCIAS ----------------- */
 
 .transactions {
-  padding: 10px 20px 20px 20px;
+  padding: 10px 10px 20px 10px; /* Padding reducido en pantallas pequeñas */
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -60,7 +59,7 @@
 }
 
 .transactioncontainer input {
-  width: 70%;
+  width: 100%; /* Ocupa toda la pantalla en móviles */
   background: transparent;
   border: 2px solid rgba(255, 255, 255, 0.2);
   outline: none;
@@ -70,37 +69,42 @@
   padding: 5px 20px;
 }
 
-@media screen and (min-width: 550px) {
-  .containermain {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-}
-
-/* (de 1024px para arriba se activa) */
-@media screen and (min-width: 1024px) {
-}
-
-@media screen and (min-width: 1130px) {
-  .containerwelcome {
-    width: 1130px;
-  }
-
+/* Media Queries para pantallas pequeñas */
+@media screen and (max-width: 550px) {
   .welcome {
+    flex-direction: column; /* Apila los elementos verticalmente */
+    align-items: center;
     padding: 0 10px;
   }
+
   .welcome img {
-    width: 100px;
-  }
-  .logo {
-    width: 30px;
+    width: 40px; /* Imagen más pequeña en móviles */
   }
 
-  .logo img {
-    margin-left: -21px;
+  .containermain {
+    flex-direction: column;
+    padding: 10px;
   }
 
+  .transactioncontainer {
+    width: 100%; /* Ocupa todo el ancho de la pantalla */
+    padding: 10px;
+  }
+}
+
+/* Media Queries para pantallas medianas */
+@media screen and (min-width: 550px) and (max-width: 1024px) {
+  .welcome {
+    padding: 0 20px;
+  }
+
+  .containerTransferences {
+    width: 80%; /* Ajuste de ancho en pantallas medianas */
+  }
+}
+
+/* Media Queries para pantallas grandes */
+@media screen and (min-width: 1024px) {
   .containerTransferences {
     width: 60%;
     padding: 17px 20px;
@@ -113,7 +117,28 @@
 
   .transactioncontainer {
     width: 40%;
-    padding: 10px;
     padding: 17px 20px;
+  }
+}
+
+@media screen and (min-width: 1130px) {
+  .containerwelcome {
+    width: 1130px;
+  }
+
+  .welcome {
+    padding: 0 10px;
+  }
+
+  .welcome img {
+    width: 100px;
+  }
+
+  .logo {
+    width: 30px;
+  }
+
+  .logo img {
+    margin-left: -21px;
   }
 }

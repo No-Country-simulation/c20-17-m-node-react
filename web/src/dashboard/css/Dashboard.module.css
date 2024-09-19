@@ -1,5 +1,5 @@
-p,
-h3 {
+/* Estilos generales */
+p, h3 {
   margin: 0;
 }
 
@@ -10,6 +10,8 @@ h3 {
   flex-direction: column;
   height: 100vh;
 }
+
+/* Logo */
 .containerlogo {
   display: flex;
 }
@@ -28,6 +30,7 @@ h3 {
   height: 30px;
   width: 50px;
 }
+
 .logo img {
   padding-top: 4px;
   width: 60px;
@@ -38,6 +41,7 @@ h3 {
   align-items: center;
 }
 
+/* Navbar */
 .navBar {
   display: flex;
   gap: 20px;
@@ -69,19 +73,16 @@ h3 {
   justify-content: center;
 }
 
-/* -------------------MAIN --------------------------------- */
-
+/* Main */
 .main {
   background-color: rgb(33, 37, 41);
 }
 
-/* -------------------- BIENVENIDA ----------------- */
-
+/* Bienvenida */
 .welcome {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /*  border: 1px solid; */
   padding: 0 50px;
   height: 100px;
 }
@@ -94,9 +95,8 @@ h3 {
   margin: 0px;
 }
 
-/* ---------------------- mostrar cuentas ------------------------ */
-.containermain {
-}
+/* Mostrar cuentas */
+.containermain {}
 
 .accountscontainer {
   display: flex;
@@ -110,6 +110,7 @@ h3 {
   cursor: pointer;
   color: white;
 }
+
 .eye:hover {
   color: #6e6f6f;
 }
@@ -161,8 +162,7 @@ h3 {
   gap: 2rem;
 }
 
-/* --------------------- TRANSFERENCIAS ----------------- */
-
+/* Transferencias */
 .transactions {
   padding: 10px 20px 20px 20px;
   display: flex;
@@ -214,8 +214,7 @@ h3 {
   padding: 5px 20px;
 }
 
-/* ------------------------------ FOOTER --------------------------------- */
-
+/* Footer */
 .footer {
   display: flex;
   align-items: center;
@@ -229,6 +228,9 @@ h3 {
   margin: 0;
 }
 
+/* Media queries para responsividad */
+
+/* Pantallas pequeñas (móviles) */
 @media screen and (max-width: 550px) {
   .navBar {
     position: absolute;
@@ -253,6 +255,7 @@ h3 {
   }
 }
 
+/* Pantallas medianas (tablets) */
 @media screen and (min-width: 550px) {
   .containermain {
     display: flex;
@@ -265,7 +268,7 @@ h3 {
   }
 }
 
-/* (de 1024px para arriba se activa) */
+/* Pantallas grandes (desktop) */
 @media screen and (min-width: 1024px) {
   .main {
     height: 630px;
@@ -283,6 +286,7 @@ h3 {
     flex-direction: column;
     align-items: center;
   }
+
   .containerwelcome {
     width: 1130px;
   }
@@ -290,9 +294,11 @@ h3 {
   .welcome {
     padding: 0 10px;
   }
+
   .welcome img {
     width: 100px;
   }
+
   .logo {
     width: 30px;
   }

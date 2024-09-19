@@ -1,3 +1,4 @@
+/* Estilos generales */
 .containerRegister {
   background-color: rgb(33, 37, 41);
   color: #fff;
@@ -9,7 +10,7 @@
   flex-direction: column;
 }
 
-/* -------------- PESTAÑAS ------------------ */
+/* Pestañas */
 .containertabs {
   display: flex;
   justify-content: flex-start;
@@ -41,6 +42,7 @@
   border-bottom: 0px;
 }
 
+/* Tarjeta de registro */
 .register-card {
   width: 510px;
   background: rgb(44, 43, 49);
@@ -120,4 +122,67 @@
   font-size: 16px;
   color: #333;
   font-weight: 700;
+}
+
+/* Media queries para hacer responsivo */
+
+/* Pantallas medianas (tablets) */
+@media (max-width: 768px) {
+  .register-card {
+    width: 90%; /* Ocupa casi todo el ancho */
+    padding: 20px;
+  }
+
+  .tablink {
+    font-size: 18px;
+  }
+
+  .register-title {
+    font-size: 24px;
+  }
+
+  .form-control {
+    font-size: 14px;
+    padding: 15px;
+  }
+
+  .btn-primary {
+    height: 40px;
+    font-size: 14px;
+  }
+}
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 576px) {
+  .register-card {
+    width: 100%; /* Ocupa todo el ancho */
+    padding: 15px;
+  }
+
+  .tablink {
+    font-size: 16px;
+  }
+
+  .form-control {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .register-form .form-row {
+    flex-direction: column; /* Cambia a columna */
+    gap: 10px;
+  }
+
+  .register-form .form-group {
+    width: 100%; /* Ancho completo */
+  }
+
+  .btn-primary {
+    height: 35px;
+    font-size: 12px;
+  }
+
+  .register-title {
+    font-size: 20px;
+  }
 }

@@ -1,7 +1,8 @@
+/* Estilos generales */
 .login {
   overflow: hidden;
   height: 100%;
-  width: 100vh;
+  width: 100vw; /* Cambiado para cubrir toda la pantalla horizontal */
 }
 
 .loginlogo {
@@ -126,4 +127,70 @@
 
 .register-link p a:hover {
   text-decoration: underline;
+}
+
+/* Media queries para hacer responsivo */
+
+/* Pantallas medianas (tablets, pantallas medianas) */
+@media (max-width: 768px) {
+  .wrapper {
+    width: 90%; /* Ocupa casi todo el ancho */
+    padding: 20px;
+  }
+
+  .wrapper h1 {
+    font-size: 28px; /* Disminuye el tamaño de la fuente */
+  }
+
+  .input-box input {
+    font-size: 14px;
+    padding: 15px 40px 15px 15px; /* Ajusta el padding en pantallas más pequeñas */
+  }
+
+  .input-box .icon {
+    font-size: 14px;
+  }
+}
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 576px) {
+  .wrapper {
+    width: 100%; /* Ocupa todo el ancho */
+    padding: 15px;
+  }
+
+  .loginlogo img {
+    height: 80px; /* Reduce el tamaño del logo */
+  }
+
+  .wrapper h1 {
+    font-size: 24px; /* Disminuye el tamaño de la fuente */
+  }
+
+  .input-box input {
+    font-size: 12px; /* Texto más pequeño */
+    padding: 10px 35px 10px 10px; /* Padding reducido */
+  }
+
+  .input-box .icon {
+    font-size: 12px; /* Iconos más pequeños */
+  }
+
+  button {
+    height: 40px; /* Botón más pequeño */
+    font-size: 14px;
+  }
+
+  .remember-forgot {
+    flex-direction: column; /* Reorganiza en columna */
+    align-items: flex-start;
+  }
+
+  .remember-forgot label {
+    margin-bottom: 10px; /* Añade espacio entre checkbox y enlace */
+  }
+
+  .register-link p {
+    font-size: 12px;
+  }
 }
