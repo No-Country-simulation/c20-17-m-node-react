@@ -82,7 +82,7 @@ export const loginUser = async (req, res) => {
       //verifico si es admin
       if (user.user_role === "admin") {
         const allUsers = await User.find()
-          .select("first_name last_name account_number email phone isActive, alias, account_balance, account_type");
+          .select("first_name last_name account_number email phone isActive alias, account_balance account_type");
         
           res.json({
           _id: user._id,
