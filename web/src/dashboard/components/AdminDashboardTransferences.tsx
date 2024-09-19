@@ -1,12 +1,12 @@
 import styles from "../css/DashboardTransferences.module.css";
 import logoperson from "../../assets/logoperson.svg";
-import UserCard from "./UserCard.tsx";
-import { useSelector } from "react-redux";
-import { RootState } from "../../services/store";
-import { User } from "../../assets/data";
+//iport UserCard from "./UserCard.tsx";
+//import { useSelector } from "react-redux";
+//import { RootState } from "../../services/store";
+//import { User } from "../../assets/data";
 
 const AdminDashboardTransferences = () => {
-  const user = useSelector((state: RootState) => state.user) as User | null;
+  //const user = useSelector((state: RootState) => state.user) as User | null;
 
   /* const handleTransfer = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,7 +51,7 @@ const AdminDashboardTransferences = () => {
         <div className={styles.containerTransferences}>
           <h2>Usuarios</h2>
           <div className={styles.transactionTransferences}>
-            {user?.allUsers?.map((user) => {
+            {/* user?.allUsers?.map((user) => {
               return (
                 <a href="">
                   <UserCard
@@ -63,7 +63,7 @@ const AdminDashboardTransferences = () => {
                   />
                 </a>
               );
-            })}
+            }) */}
           </div>
         </div>
 

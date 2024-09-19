@@ -53,7 +53,7 @@ export const login = async (
 
 export const register = async (
   first_name: string,
-  lastname: string,
+  last_name: string,
   email: string,
   address: string,
   phone: string,
@@ -64,7 +64,7 @@ export const register = async (
   try {
     const response = await axios.post<RegisterResponse>(`${API_URL}/register`, {
       first_name,
-      lastname,
+      last_name,
       email,
       address,
       phone,

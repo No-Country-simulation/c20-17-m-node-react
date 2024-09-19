@@ -1,15 +1,18 @@
 import styles from "../css/AdminDashboardUser.module.css";
 import logoperson from "../../assets/logoperson.svg";
 import UserCard from "./UserCard.tsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../services/store";
 import { User } from "../../assets/data";
 import { useState } from "react";
 import { AdminUser } from "../../assets/data.tsx";
 import { updateDataUser } from "../../services/adminService.tsx";
+import { setUser } from "../../services/userSlice.tsx";
+import { updateUser } from "../../services/authService";
 
 const AdminDashboardUser = () => {
   const user = useSelector((state: RootState) => state.user) as User | null;
+  const dispatch = useDispatch();
   console.log(user);
   //Datos del Usuario
   const [name, setName] = useState("");
@@ -50,7 +53,7 @@ const AdminDashboardUser = () => {
     }
 
     try {
-      const updateUser = await updateDataUser(
+      const updateAdminUser = await updateDataUser(
         selectedUser._id ?? "",
         name,
         lastname,
@@ -60,7 +63,20 @@ const AdminDashboardUser = () => {
         isActive
       );
 
-      alert(updateUser.message);
+      /* if (updateUser.status === 409) {
+        alert(createTransfer.data.message);
+      } else {
+        // Aquí manejarías la creación exitosa de la transferencia
+        alert(createTransfer.data.message);
+        console.log(user?._id);
+        const userAdminUpdate = await updateUser(user?._id ?? "");
+
+        dispatch(setUser(userAdminUpdate));
+      } */
+      alert(updateAdminUser.message);
+      console.log(updateUser);
+      const userAdminUpdate = await updateUser(user?._id ?? "");
+      dispatch(setUser(userAdminUpdate));
     } catch (error) {
       console.log(error);
     }

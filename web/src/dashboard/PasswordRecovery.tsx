@@ -56,8 +56,8 @@ function PasswordRecovery() {
             <form onSubmit={handlePasswordRecovery}>
               <div className="recoveryInput">
                 <p>
-                  Ingresa tu correo electrónico y te enviaremos un enlace para
-                  restablecer tu contraseña.
+                  Ingresa tu correo electrónico y te enviaremos una contraseña
+                  temporal
                 </p>
                 <input
                   type="email"
