@@ -120,6 +120,8 @@ export const updateUser = async (req, res) => {
   try {
     const user = await User.findById({ _id });
 
+    
+
     // Se llama a la funcion que recopila las transferencias "tranfers()"
     res.json({
       _id: user._id,
