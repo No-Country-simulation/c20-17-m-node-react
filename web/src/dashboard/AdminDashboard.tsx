@@ -55,9 +55,9 @@ function AdminDashboard() {
                   <li>
                     <Link to="/admin">Usuarios</Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to="admintransferences">Transferencias</Link>
-                  </li>
+                  </li> */}
                   <li>
                     <a onClick={handleLogout}>Cerrar sesión</a>
                   </li>

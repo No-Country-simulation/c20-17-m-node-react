@@ -2,7 +2,7 @@ import User from "../models/user.js";
 import Transfer from "../models/transfer.js";
 import otpGenerator from "otp-generator";
 import Otp from "../models/otp.js";
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 import "dotenv/config";
 import { transfers } from "../utils/transferData.js";
 import { generateAlias } from "../utils/generateAias.js";
@@ -22,7 +22,11 @@ export const registerUser = async (req, res) => {
     }
 
     const fkIBAN = faker.finance.iban();
-    const fkAccountBalance = faker.number.float({ min: 5000, max: 999999, fractionDigits: 2 })
+    const fkAccountBalance = faker.number.float({
+      min: 5000,
+      max: 999999,
+      fractionDigits: 2,
+    });
     console.log("log de fakeIban ---> ", fkIBAN);
     console.log("log de fkAccountBalancd ---> ", fkAccountBalance);
 
@@ -92,12 +96,13 @@ export const loginUser = async (req, res) => {
     if (user && (await user.matchPassword(data.password))) {
       //verifico si es admin
       if (user.user_role === "admin") {
-        const allUsers = await User.find()
-          .select("first_name last_name account_number email phone isActive alias account_balance account_type");
+        const allUsers = await User.find().select(
+          "first_name last_name account_number email phone isActive alias account_balance account_type"
+        );
 
         const allTransfers = await Transfer.find();
-        
-          res.json({
+
+        res.json({
           _id: user._id,
           first_name: user.first_name,
           last_name: user.last_name,
@@ -107,7 +112,7 @@ export const loginUser = async (req, res) => {
           account_balance: 0,
           token: generateToken(user._id),
           allTransfers,
-          allUsers
+          allUsers,
         });
       } else {
         res.json({
@@ -132,8 +137,6 @@ export const updateUser = async (req, res) => {
   const { _id } = req.body;
   try {
     const user = await User.findById({ _id });
-
-    
 
     // Se llama a la funcion que recopila las transferencias "tranfers()"
     res.json({

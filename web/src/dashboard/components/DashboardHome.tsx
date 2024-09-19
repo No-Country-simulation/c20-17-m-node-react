@@ -48,7 +48,7 @@ function DashboardHome() {
                         .split("_")[0]
                         .toUpperCase()}
                     </h6>
-                    <p>****{(user?.account_number || "Unknown").slice(-4)}</p>
+                    <p>{user?.account_number || "Unknown"}</p>
                   </div>
                   <div>
                     <span>

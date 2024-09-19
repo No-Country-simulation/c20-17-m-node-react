@@ -25,7 +25,7 @@ const AdminDashboardUser = () => {
 
   // Filtrar usuarios según el término de búsqueda
   const filteredUsers = user?.allUsers?.filter((user) =>
-    `${user.first_name} ${user.last_name} ${user.account_number} ${user.alias}`
+    `${user.first_name} ${user.last_name} ${user.account_number} ${user.alias} ${user.account_type}`
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
   );
@@ -70,8 +70,8 @@ const AdminDashboardUser = () => {
     <div className={styles.containerwelcome}>
       <div className={styles.welcome}>
         <div>
-          <h3>Realiza tus Transferencias </h3>
-          <p>¿Con quien haremos transacciones?</p>
+          <h3>Panel de Administración</h3>
+          <p></p>
         </div>
         <img src={logoperson} alt="Logo Persona" />
       </div>
