@@ -39,6 +39,9 @@ export interface AdminUser {
   _id: string;
   first_name: string;
   last_name: string;
+  email: string;
+  phone: string;
   account_number: string;
   alias: string;
+  isActive: boolean;
 }
