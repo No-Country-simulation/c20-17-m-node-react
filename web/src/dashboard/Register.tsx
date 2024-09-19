@@ -49,7 +49,7 @@ function Register() {
 
     const first_name = (document.getElementById("name") as HTMLInputElement)
       .value;
-    const lastname = (document.getElementById("apellido") as HTMLInputElement)
+    const last_name = (document.getElementById("apellido") as HTMLInputElement)
       .value;
     const email = (document.getElementById("email") as HTMLInputElement).value;
     const address = (document.getElementById("address") as HTMLInputElement)
@@ -68,10 +68,12 @@ function Register() {
       alert("Las contraseñas no coinciden");
       return;
     }
+
     try {
+      console.log("estoy en el try: " + last_name);
       const createUser = await register(
         first_name,
-        lastname,
+        last_name,
         email,
         address,
         phone,

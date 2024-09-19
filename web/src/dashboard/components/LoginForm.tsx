@@ -80,6 +80,9 @@ function LoginForm() {
             <div className="loginlogo">
               <img src={logoimg} alt="LogoNoaBank" />
             </div>
+            <div>
+              <h3 style={{ textAlign: "center" }}>Bienvenido a Noabank</h3>
+            </div>
             <div className="input-box">
               <input
                 type="text"

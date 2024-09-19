@@ -90,26 +90,32 @@ const DashboardTransferences = () => {
         <div className={styles.containerTransferences}>
           <h2>Transferencias</h2>
           <div className={styles.transactionTransferences}>
-            {user?.transfers?.map((transference) => {
-              const color =
-                user._id === transference.receptor.receptorId
-                  ? "#479E47"
-                  : "#FF4747";
-              const accountOwner =
-                user._id === transference.receptor.receptorId
-                  ? transference.emisor.firstname
-                  : transference.receptor.firstname;
+            {user?.transfers &&
+              user?.transfers?.map((transference) => {
+                const color =
+                  user._id === transference.receptor.receptorId
+                    ? "#479E47"
+                    : "#FF4747";
+                const accountOwner =
+                  user._id === transference.receptor.receptorId
+                    ? transference.emisor.firstname
+                    : transference.receptor.firstname;
 
-              return (
-                <DashboarTransferencesCard
-                  key={transference._id}
-                  nombre={accountOwner}
-                  fecha={transference.createdAt}
-                  monto={transference.mount}
-                  color={color}
-                />
-              );
-            })}
+                return (
+                  <DashboarTransferencesCard
+                    key={transference._id}
+                    nombre={accountOwner}
+                    fecha={transference.createdAt}
+                    monto={transference.mount}
+                    color={color}
+                  />
+                );
+              })}
+            {!user?.transfers && (
+              <div className={styles.transactionnotfound}>
+                <span>Aun no Hay transferencias</span>
+              </div>
+            )}
           </div>
         </div>
 
