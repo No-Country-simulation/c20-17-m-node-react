@@ -28,7 +28,7 @@ const adminUpdateUser = async (req, res) => {
 
         await User.findByIdAndUpdate(_id, toUpdate)
 
-        res.status(200).json({message: 'Datos de usuario actulizado exitosamente'});
+        res.status(200).json({message: 'Datos de usuario actualizado exitosamente'});
         
     } catch (err) {
         res.status(500).json({ message: err.message });

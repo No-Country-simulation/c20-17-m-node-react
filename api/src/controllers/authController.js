@@ -1,4 +1,5 @@
 import User from "../models/user.js";
+import Transfer from "../models/transfer.js";
 import otpGenerator from "otp-generator";
 import Otp from "../models/otp.js";
 import "dotenv/config";
@@ -83,6 +84,8 @@ export const loginUser = async (req, res) => {
       if (user.user_role === "admin") {
         const allUsers = await User.find()
           .select("first_name last_name account_number email phone isActive alias account_balance account_type");
+
+        const allTransfers = await Transfer.find();
         
           res.json({
           _id: user._id,
@@ -93,7 +96,7 @@ export const loginUser = async (req, res) => {
           user_role: user.user_role,
           account_balance: 0,
           token: generateToken(user._id),
-          transfers: [],
+          allTransfers,
           allUsers
         });
       } else {
