@@ -138,18 +138,38 @@ export const updateUser = async (req, res) => {
   try {
     const user = await User.findById({ _id });
 
-    // Se llama a la funcion que recopila las transferencias "tranfers()"
-    res.json({
-      _id: user._id,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      account_type: user.account_type,
-      account_number: user.account_number,
-      user_role: user.user_role,
-      account_balance: user.account_balance,
-      token: generateToken(user._id),
-      transfers: await transfers(user),
-    });
+    if (user.user_role === "admin") {
+      const allUsers = await User.find().select(
+        "first_name last_name account_number email phone isActive alias account_balance account_type"
+      );
+
+      const allTransfers = await Transfer.find();
+
+      res.json({
+        _id: user._id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        account_type: "",
+        account_number: "",
+        user_role: user.user_role,
+        account_balance: 0,
+        token: generateToken(user._id),
+        allTransfers,
+        allUsers,
+      });
+    } else {
+      res.json({
+        _id: user._id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        account_type: user.account_type,
+        account_number: user.account_number,
+        user_role: user.user_role,
+        account_balance: user.account_balance,
+        token: generateToken(user._id),
+        transfers: await transfers(user),
+      });
+    }
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
