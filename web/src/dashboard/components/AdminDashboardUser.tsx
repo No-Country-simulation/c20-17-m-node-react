@@ -7,8 +7,15 @@ import { User } from "../../assets/data";
 import { useState } from "react";
 import { AdminUser } from "../../assets/data.tsx";
 
-const AdminDashboardTransferences = () => {
+const AdminDashboardUser = () => {
   const user = useSelector((state: RootState) => state.user) as User | null;
+
+  //Datos del Usuario
+  const [name, setName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [isActive, setActive] = useState(false);
 
   // Estado local para el término de búsqueda
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,7 +23,7 @@ const AdminDashboardTransferences = () => {
 
   // Filtrar usuarios según el término de búsqueda
   const filteredUsers = user?.allUsers?.filter((user) =>
-    `${user.first_name} ${user.last_name}`
+    `${user.first_name} ${user.last_name} ${user.account_number} ${user.alias}`
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
   );
@@ -24,6 +31,11 @@ const AdminDashboardTransferences = () => {
   // Función para manejar la selección de un usuario
   const handleUserClick = (user: AdminUser) => {
     setSelectedUser(user); // Almacenar el usuario seleccionado
+    setActive(user.isActive); // Almacenar el estado activo/inactivo
+    setName(user.first_name);
+    setLastName(user.last_name);
+    setEmail(user.email);
+    setPhone(user.phone);
   };
 
   return (
@@ -70,30 +82,49 @@ const AdminDashboardTransferences = () => {
 
         <div className={styles.transactioncontainer}>
           <div className={styles.transactionbackground}>
+            <h4>Editar Usuario</h4>
             {selectedUser && (
               <form>
-                <h4>Editar Usuario</h4>
                 <label>Nombre:</label>
                 <input
                   type="text"
-                  value={selectedUser.first_name}
-                  onChange={(e) =>
-                    setSelectedUser({
-                      ...selectedUser,
-                      first_name: e.target.value,
-                    })
-                  }
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
                 <br />
-                <label>Alias:</label>
+                <label>Apellido:</label>
                 <input
                   type="text"
-                  value={selectedUser.alias}
-                  onChange={(e) =>
-                    setSelectedUser({ ...selectedUser, alias: e.target.value })
-                  }
+                  value={lastname}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
-                {/* Aquí puedes agregar más campos para modificar los datos */}
+                <br />
+                <label>Email:</label>
+                <input
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <br />
+                <label>Telefono:</label>
+                <input
+                  type="text"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+                <br />
+                <label>Estado:</label>
+                <label className={styles.switch}>
+                  <input
+                    type="checkbox"
+                    id="toggle"
+                    checked={isActive} // Mostrar si está activo o no
+                    onChange={() => setActive(!isActive)} // Cambiar el estado al hacer clic
+                  />
+                  <span className={styles.slider}></span>
+                </label>
+
+                <br />
                 <button type="submit">Guardar Cambios</button>
               </form>
             )}
@@ -104,4 +135,4 @@ const AdminDashboardTransferences = () => {
   );
 };
 
-export default AdminDashboardTransferences;
+export default AdminDashboardUser;
