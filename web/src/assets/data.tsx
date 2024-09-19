@@ -36,7 +36,7 @@ export interface searchedUser {
 }
 
 export interface AdminUser {
-  _id: string;
+  _id: string | null;
   first_name: string;
   last_name: string;
   email: string;

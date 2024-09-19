@@ -6,10 +6,11 @@ import { RootState } from "../../services/store";
 import { User } from "../../assets/data";
 import { useState } from "react";
 import { AdminUser } from "../../assets/data.tsx";
+import { updateDataUser } from "../../services/adminService.tsx";
 
 const AdminDashboardUser = () => {
   const user = useSelector((state: RootState) => state.user) as User | null;
-  console.log(user?.allUsers);
+  console.log(user);
   //Datos del Usuario
   const [name, setName] = useState("");
   const [lastname, setLastName] = useState("");
@@ -38,6 +39,31 @@ const AdminDashboardUser = () => {
     setEmail(user.email);
     setPhone(user.phone);
     setMount(user.account_balance);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!selectedUser) {
+      console.error("selectedUser es nulo o indefinido");
+      return;
+    }
+
+    try {
+      const updateUser = await updateDataUser(
+        selectedUser._id ?? "",
+        name,
+        lastname,
+        email,
+        phone,
+        mount,
+        isActive
+      );
+
+      alert(updateUser.message);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -87,7 +113,7 @@ const AdminDashboardUser = () => {
           <div className={styles.transactionbackground}>
             <h4>Editar Usuario</h4>
             {selectedUser && (
-              <form>
+              <form onSubmit={handleSubmit}>
                 <label>Nombre:</label>
                 <input
                   type="text"
