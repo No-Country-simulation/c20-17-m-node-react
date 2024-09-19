@@ -41,7 +41,9 @@ export interface AdminUser {
   last_name: string;
   email: string;
   phone: string;
+  account_type: string;
   account_number: string;
+  account_balance: number;
   alias: string;
   isActive: boolean;
 }

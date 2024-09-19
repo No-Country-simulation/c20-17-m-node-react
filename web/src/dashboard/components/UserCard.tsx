@@ -4,8 +4,15 @@ interface props {
   last_name: string;
   account_number: string;
   alias: string;
+  type: string;
 }
-function UserCard({ first_name, last_name, account_number, alias }: props) {
+function UserCard({
+  first_name,
+  last_name,
+  account_number,
+  alias,
+  type,
+}: props) {
   return (
     <>
       <div className={styles.transactioncard}>
@@ -15,10 +22,11 @@ function UserCard({ first_name, last_name, account_number, alias }: props) {
           </h6>
           <p>{alias}</p>
         </div>
-        <div>
+        <div style={{ textAlign: "right" }}>
           <p style={{ fontWeight: "bold", fontSize: "12px" }}>
             {account_number}
           </p>
+          <p>{type}</p>
         </div>
       </div>
     </>

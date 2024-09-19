@@ -9,12 +9,13 @@ import { AdminUser } from "../../assets/data.tsx";
 
 const AdminDashboardUser = () => {
   const user = useSelector((state: RootState) => state.user) as User | null;
-
+  console.log(user?.allUsers);
   //Datos del Usuario
   const [name, setName] = useState("");
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [mount, setMount] = useState(0);
   const [isActive, setActive] = useState(false);
 
   // Estado local para el término de búsqueda
@@ -36,6 +37,7 @@ const AdminDashboardUser = () => {
     setLastName(user.last_name);
     setEmail(user.email);
     setPhone(user.phone);
+    setMount(user.account_balance);
   };
 
   return (
@@ -73,6 +75,7 @@ const AdminDashboardUser = () => {
                     last_name={user.last_name}
                     account_number={user.account_number}
                     alias={user.alias}
+                    type={user.account_type}
                   />
                 </a>
               );
@@ -111,6 +114,13 @@ const AdminDashboardUser = () => {
                   type="text"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
+                />
+                <br />
+                <label>Monto de Cuenta:</label>
+                <input
+                  type="text"
+                  value={mount}
+                  onChange={(e) => setMount(parseFloat(e.target.value))}
                 />
                 <br />
                 <label>Estado:</label>
