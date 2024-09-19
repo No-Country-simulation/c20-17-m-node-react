@@ -2,6 +2,7 @@ import User from "../models/user.js";
 import Transfer from "../models/transfer.js";
 import otpGenerator from "otp-generator";
 import Otp from "../models/otp.js";
+import { faker } from '@faker-js/faker';
 import "dotenv/config";
 import { transfers } from "../utils/transferData.js";
 import { generateAlias } from "../utils/generateAias.js";
@@ -20,6 +21,11 @@ export const registerUser = async (req, res) => {
         .json({ message: "Un usuario ya existe con este correo." });
     }
 
+    const fkIBAN = faker.finance.iban();
+    const fkAccountBalance = faker.number.float({ min: 5000, max: 999999, fractionDigits: 2 })
+    console.log("log de fakeIban ---> ", fkIBAN);
+    console.log("log de fkAccountBalancd ---> ", fkAccountBalance);
+
     const accountType =
       data.type === "empresa" ? "company_account" : "personal_account";
 
@@ -27,7 +33,11 @@ export const registerUser = async (req, res) => {
       ...data,
       account_type: accountType,
       alias: generateAlias(data.first_name, data.last_name),
+      account_number: fkIBAN,
+      account_balance: fkAccountBalance,
     });
+
+    console.log("log de user con iban y account_balance ----> ", user);
 
     res.status(201).json({
       message: "Su cuenta ha sido creada exitosamente.",
