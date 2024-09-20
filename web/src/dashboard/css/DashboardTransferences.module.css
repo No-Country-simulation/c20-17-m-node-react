@@ -58,8 +58,14 @@
   margin-top: 44px;
 }
 
+.transactionfound {
+  margin-top: 10px;
+}
+
 .transactioncontainer input {
-  width: 100%; /* Ocupa toda la pantalla en móviles */
+  /* Ocupa toda la pantalla en móviles */
+  margin-top: 10px;
+  margin-right: 10px;
   background: transparent;
   border: 2px solid rgba(255, 255, 255, 0.2);
   outline: none;
@@ -67,6 +73,20 @@
   font-size: 16px;
   color: #ffffff;
   padding: 5px 20px;
+}
+
+.btnsearch {
+  width: 100px;
+  height: 30px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 700;
 }
 
 /* Media Queries para pantallas pequeñas */
