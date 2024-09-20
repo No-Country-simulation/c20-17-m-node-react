@@ -71,6 +71,9 @@ const DashboardTransferences = () => {
         const userUpdate = await updateUser(user?._id ?? "");
 
         dispatch(setUser(userUpdate));
+
+        setTransactioncontainer(false);
+        setAccountNumber("");
       }
     } catch (error) {
       console.error(error);
@@ -126,11 +129,16 @@ const DashboardTransferences = () => {
               <p>Ingresa el número de cuenta</p>
               <input
                 type="text"
+                className={styles.inputsearch}
                 placeholder="Número de cuenta"
                 value={accountNumber}
                 onChange={(e) => setAccountNumber(e.target.value)}
               />
-              <button onClick={handleSearch} disabled={isLoading}>
+              <button
+                className={styles.btnsearch}
+                onClick={handleSearch}
+                disabled={isLoading}
+              >
                 {isLoading ? "Buscando..." : "Buscar"}
               </button>
             </div>
@@ -140,8 +148,10 @@ const DashboardTransferences = () => {
                   {transactionFound && (
                     <div className={styles.transactionfound}>
                       <span>Cuenta encontrada</span>
-                      <h5>{userName}</h5>
-                      <p>Ingresa el monto a transferir</p>
+                      <h5 style={{ marginTop: "10px" }}>{userName}</h5>
+                      <p style={{ textAlign: "left" }}>
+                        Ingresa el monto a transferir
+                      </p>
                       <input
                         type="text"
                         placeholder="Monto a transferir"
@@ -149,7 +159,9 @@ const DashboardTransferences = () => {
                           setMountTransfer(Number(e.target.value))
                         }
                       />
-                      <button type="submit">Transferir</button>
+                      <button type="submit" className={styles.btnsearch}>
+                        Transferir
+                      </button>
                     </div>
                   )}
                   {!transactionFound && (

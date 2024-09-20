@@ -76,10 +76,11 @@ function PasswordRecovery() {
         )}
 
         {step === 2 && (
-          <div>
+          <div className="recoveryForm">
             <form onSubmit={handleLogin}>
               <input
                 type="text"
+                className="forminput"
                 placeholder="Ingresa tu código OTP"
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}

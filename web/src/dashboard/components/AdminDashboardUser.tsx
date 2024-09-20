@@ -130,53 +130,58 @@ const AdminDashboardUser = () => {
             <h4>Editar Usuario</h4>
             {selectedUser && (
               <form onSubmit={handleSubmit}>
-                <label>Nombre:</label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <br />
-                <label>Apellido:</label>
-                <input
-                  type="text"
-                  value={lastname}
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-                <br />
-                <label>Email:</label>
-                <input
-                  type="text"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <br />
-                <label>Telefono:</label>
-                <input
-                  type="text"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-                <br />
-                <label>Monto de Cuenta:</label>
-                <input
-                  type="text"
-                  value={mount}
-                  onChange={(e) => setMount(parseFloat(e.target.value))}
-                />
-                <br />
-                <label>Estado:</label>
-                <label className={styles.switch}>
+                <div>
+                  <label>Nombre:</label>
                   <input
-                    type="checkbox"
-                    id="toggle"
-                    checked={isActive} // Mostrar si está activo o no
-                    onChange={() => setActive(!isActive)} // Cambiar el estado al hacer clic
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                   />
-                  <span className={styles.slider}></span>
-                </label>
-
-                <br />
+                </div>
+                <div>
+                  <label>Apellido:</label>
+                  <input
+                    type="text"
+                    value={lastname}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label>Email:</label>
+                  <input
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label>Telefono:</label>
+                  <input
+                    type="text"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label>Monto de Cuenta:</label>
+                  <input
+                    type="text"
+                    value={mount}
+                    onChange={(e) => setMount(parseFloat(e.target.value))}
+                  />
+                </div>
+                <div>
+                  <label>Estado:</label>
+                  <label className={styles.switch}>
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      checked={isActive} // Mostrar si está activo o no
+                      onChange={() => setActive(!isActive)} // Cambiar el estado al hacer clic
+                    />
+                    <span className={styles.slider}></span>
+                  </label>
+                </div>
                 <button type="submit">Guardar Cambios</button>
               </form>
             )}

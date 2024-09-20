@@ -136,6 +136,20 @@ input:checked + .slider:before {
   margin-top: 44px;
 }
 
+.transactionbackground form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.transactionbackground form label:not(.switch) {
+  width: 80px;
+}
+
+.transactionbackground form div {
+  display: flex;
+  align-items: center;
+}
+
 .transactioncontainer input {
   width: 70%;
   background: transparent;
