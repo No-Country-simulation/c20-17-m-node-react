@@ -93,6 +93,11 @@ export const loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ email: data.email });
 
+    // console.log("log de user properties ---> ", user);
+    if(!user.isActive) {
+      return res.status(401).json({ message: "Acceso no permitido, usuario inactivo" });
+    } 
+
     if (user && (await user.matchPassword(data.password))) {
       //verifico si es admin
       if (user.user_role === "admin") {
